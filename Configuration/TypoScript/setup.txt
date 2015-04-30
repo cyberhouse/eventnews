@@ -1,0 +1,4 @@
+
+plugin.tx_news.settings {
+	demandClass = GeorgRinger\Eventnews\Domain\Model\Dto\Demand
+}

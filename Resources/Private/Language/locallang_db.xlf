@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2015-02-03T22:04:04Z" product-name="eventnews">
+		<header/>
+		<body>
+			<trans-unit id="tx_eventnews_domain_model_location">
+				<source>Location</source>
+			</trans-unit>
+			<trans-unit id="tx_eventnews_domain_model_location.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_eventnews_domain_model_location.description">
+				<source>Description</source>
+			</trans-unit>
+			<trans-unit id="tx_eventnews_domain_model_location.lat">
+				<source>Lat</source>
+			</trans-unit>
+			<trans-unit id="tx_eventnews_domain_model_location.lng">
+				<source>Lng</source>
+			</trans-unit>
+			<trans-unit id="tx_eventnews_domain_model_location.link">
+				<source>Link</source>
+			</trans-unit>
+			<trans-unit id="tx_eventnews_domain_model_organizer">
+				<source>Organizer</source>
+			</trans-unit>
+			<trans-unit id="tx_eventnews_domain_model_organizer.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_eventnews_domain_model_organizer.description">
+				<source>Description</source>
+			</trans-unit>
+			<trans-unit id="tx_eventnews_domain_model_organizer.link">
+				<source>Link</source>
+			</trans-unit>
+			<trans-unit id="tx_eventnews_domain_model_news">
+				<source>News</source>
+			</trans-unit>
+			<trans-unit id="tx_eventnews_domain_model_news.is_event">
+				<source>Is Event</source>
+			</trans-unit>
+			<trans-unit id="tx_eventnews_domain_model_news.full_day">
+				<source>Full Day</source>
+			</trans-unit>
+			<trans-unit id="tx_eventnews_domain_model_news.event_end">
+				<source>Event End</source>
+			</trans-unit>
+			<trans-unit id="tx_news_domain_model_news.organizer_simple">
+				<source>Organizer simple</source>
+			</trans-unit>
+			<trans-unit id="tx_news_domain_model_news.location_simple">
+				<source>Location simple</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

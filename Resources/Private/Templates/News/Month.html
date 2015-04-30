@@ -1,0 +1,153 @@
+{namespace events=GeorgRinger\Eventnews\ViewHelpers}
+<f:layout name="General" />
+
+<f:section name="content">
+	<div class="row">
+		<div class="col-md-2">
+			<h3>Filter</h3>
+			<f:form method="post" action="month" object="{search}" name="search" arguments="{overwriteDemand:overwriteDemand}">
+				<input type="hidden" name="id" value="{currentPageId}" />
+
+				<h4>Orgas</h4>
+				<ul style="list-style: none">
+					<f:for each="{allOrganizers}" as="organizer">
+						<li>
+							<label>
+								<f:form.checkbox property="organizers.{organizer.uid}" value="{organizer.uid}" />
+								{organizer.title} </label>
+						</li>
+					</f:for>
+				</ul>
+				<h4>Location</h4>
+				<ul style="list-style: none">
+					<f:for each="{allLocations}" as="location">
+						<li>
+							<label>
+								<f:form.checkbox property="locations.{location.uid}" value="{location.uid}" />
+								{location.title} </label>
+						</li>
+					</f:for>
+				</ul>
+				<h4>Categories</h4>
+				<ul style="list-style: none">
+					<f:for each="{allCategories}" as="category">
+						<li>
+							<label>
+								<f:form.checkbox property="categories.{category.uid}" value="{category.uid}" />
+								{category.title} </label>
+						</li>
+					</f:for>
+				</ul>
+				<f:form.submit value="submit" class="btn btn-mai" />
+			</f:form>
+
+		</div>
+		<div class="col-md-7">
+			<h2>Kalender</h2>
+			<events:calendar newsList="{news}" demand="{demand}" firstDayOfWeek="1">
+				<table class="table">
+					<tr class="title">
+						<th colspan="7">
+							<ul class="pager">
+								<li class="previous">
+									<f:link.page rel="nofollow" pageUid="{currentPageId}" additionalParams="{tx_news_pi1:{overwriteDemand:{month:previousMonthData.month,year:previousMonthData.year}}}">
+										&larr; {f:format.date(date:previousMonthData.date,format:'%B %Y')}
+									</f:link.page>
+								</li>
+								<li>{f:format.date(date:currentMonthData.date,format:'%B %Y')}</li>
+								<li class="next">
+									<f:link.page rel="nofollow" pageUid="{currentPageId}" additionalParams="{tx_news_pi1:{overwriteDemand:{month:nextMonthData.month,year:nextMonthData.year}}}">
+										{f:format.date(date:nextMonthData.date,format:'%B %Y')} &rarr;
+									</f:link.page>
+								</li>
+							</ul>
+						</th>
+					</tr>
+					<tr class="days">
+						<f:for each="{weeks.0}" as="day">
+							<th>
+								{f:format.date(date: day.ts, format: '%a')}
+							</th>
+						</f:for>
+					</tr>
+					<f:for each="{weeks}" as="week">
+						<tr>
+							<f:for each="{week}" as="day">
+								<f:render section="calday" arguments="{day:day, settings:settings}"></f:render>
+							</f:for>
+						</tr>
+					</f:for>
+				</table>
+			</events:calendar>
+		</div>
+		<div class="col-md-3">
+			<h2>Liste</h2>
+
+			<div class="row">
+				<f:for each="{news}" as="n">
+					<f:if condition="{overwriteDemand.day}">
+						<f:then>
+							<events:dayCompare newsItem="{n}" demand="{demand}">
+								<f:then>
+									<f:render section="listItem" arguments="{_all}" />
+								</f:then>
+							</events:dayCompare>
+						</f:then>
+						<f:else>
+							yyyy
+							<f:render section="listItem" arguments="{_all}" />
+						</f:else>
+					</f:if>
+
+				</f:for>
+			</div>
+		</div>
+	</div>
+</f:section>
+
+<f:Section name="listItem">
+	<div class="col-md-12" style="border: 1px solid:#ccc;">
+		<strong>{n.title} | {f:format.date(date:n.datetime.date,format:'%d.%m')}</strong>
+		<ul>
+			<f:if condition="{n.organisator}">
+				<li><strong>orga</strong>: {n.organisator.title}
+					<small>(uid: {n.organisator.uid})</small>
+				</li>
+			</f:if>
+			<f:if condition="{n.location}">
+				<li><strong>location</strong>: {n.location.title}
+					<small>(uid: {n.location.uid})</small>
+				</li>
+			</f:if>
+			<f:if condition="{n.eventEnd}">
+				<li>
+					<strong>event end</strong>: {f:format.date(date:n.eventEnd.date,format:'%d.%m.%Y')}
+				</li>
+			</f:if>
+		</ul>
+	</div>
+</f:Section>
+
+<f:section name="calday">
+	<td class="day{f:format.date(date: day.ts, format: 'N')} {f:if(condition: '{day.curmonth}', then: 'curmonth', else: 'othermonth')}{f:if(condition: '{day.news}', then: ' hasevents')}{f:if(condition: '{day.curday}', then: ' today')}">
+		<f:if condition="{day.dayBelongsToCurrentMonth}">
+			<f:if condition="{day.news}">
+				<f:then>
+					<strong>
+						<f:link.action action="month" addQueryString="1" additionalParams="{tx_news_pi1:{overwriteDemand:{day:day.day}}}">{day.day}</f:link.action>
+					</strong>
+
+					<f:for each="{day.news}" as="newsItem">
+						<div style="border: 1px solid #ccc;margin:2px;padding:2px">
+							{newsItem.title}
+						</div>
+					</f:for>
+
+				</f:then>
+				<f:else>
+					{day.day}
+				</f:else>
+			</f:if>
+		</f:if>
+	</td>
+</f:section>

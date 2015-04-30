@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2015-02-03T22:04:04Z" product-name="eventnews">
+		<header/>
+		<body>
+			<trans-unit id="flexforms_general.eventRestriction">
+				<source>Event Restriction</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.eventRestriction.1">
+				<source>Only events</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.eventRestriction.2">
+				<source>Only non events</source>
+			</trans-unit>
+
+		</body>
+	</file>
+</xliff>
