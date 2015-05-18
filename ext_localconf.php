@@ -34,3 +34,10 @@ $GLOBALS['TYPO3_CONF_VARS']['EXT']['news']['Domain/Repository/AbstractDemandedRe
 
 $GLOBALS['TYPO3_CONF_VARS']['EXT']['news']['classes']['Domain/Model/News'][] = 'eventnews';
 $GLOBALS['TYPO3_CONF_VARS']['EXT']['news']['classes']['Controller/NewsController'][] = 'eventnews';
+
+\TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\SignalSlot\\Dispatcher')->connect(
+	'GeorgRinger\\News\\Domain\\Service\\NewsImportService',
+	'postHydrate',
+	'GeorgRinger\\Eventnews\\Aspect\\NewsImportAspect',
+	'postHydrate'
+);
