@@ -17,11 +17,11 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tceforms.php']['get
 	= 'GeorgRinger\\Eventnews\\Hooks\\FormEngineHook';
 
 // Update flexforms
-$GLOBALS['TYPO3_CONF_VARS']['EXT']['news']['Hooks/T3libBefunc.php']['updateFlexforms']['eventnews']
-	= 'GeorgRinger\\Eventnews\\Hooks\\T3libBefunc->updateFlexforms';
+$GLOBALS['TYPO3_CONF_VARS']['EXT']['news']['Hooks/BackendUtility.php']['updateFlexforms']['eventnews']
+	= 'GeorgRinger\\Eventnews\\Hooks\\BackendUtility->updateFlexforms';
 
-$GLOBALS['TYPO3_CONF_VARS']['EXT']['news']['GeorgRinger\\News\\Hooks\\CmsLayout']['extensionSummary']['eventnews']
-	= 'GeorgRinger\\Eventnews\\Hooks\\CmsLayout->extensionSummary';
+$GLOBALS['TYPO3_CONF_VARS']['EXT']['news']['GeorgRinger\\News\\Hooks\\PageLayoutView']['extensionSummary']['eventnews']
+	= 'GeorgRinger\\Eventnews\\Hooks\\PageLayoutView->extensionSummary';
 
 // Extend the query
 $GLOBALS['TYPO3_CONF_VARS']['EXT']['news']['Domain/Repository/AbstractDemandedRepository.php']['findDemanded']['eventnews']

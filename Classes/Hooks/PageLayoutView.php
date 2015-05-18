@@ -16,42 +16,42 @@ namespace GeorgRinger\EventNews\Hooks;
 	 */
 
 /**
- * Class CmsLayout
+ * Class PageLayoutView
  *
  * @package GeorgRinger\EventNews\Hooks
  */
-class CmsLayout {
+class PageLayoutView {
 
 	/**
 	 * Provide an extension summary for the month selection
 	 *
 	 * @param array $params
-	 * @param \GeorgRinger\News\Hooks\CmsLayout $cmsLayout
+	 * @param \GeorgRinger\News\Hooks\PageLayoutView $pageLayout
 	 * @return void
 	 */
-	public function extensionSummary(array $params, \GeorgRinger\News\Hooks\CmsLayout $cmsLayout) {
+	public function extensionSummary(array $params, \GeorgRinger\News\Hooks\PageLayoutView $pageLayout) {
 		if ($params['action'] === 'news_month') {
-			$cmsLayout->getStartingPoint();
-			$cmsLayout->getTimeRestrictionSetting();
-			$cmsLayout->getTopNewsRestrictionSetting();
-			$cmsLayout->getOrderSettings();
-			$cmsLayout->getCategorySettings();
-			$cmsLayout->getArchiveSettings();
-			$cmsLayout->getOffsetLimitSettings();
-			$cmsLayout->getDetailPidSetting();
-			$cmsLayout->getListPidSetting();
-			$cmsLayout->getTagRestrictionSetting();
-			$this->getEventRestrictionSetting($cmsLayout);
+			$pageLayout->getStartingPoint();
+			$pageLayout->getTimeRestrictionSetting();
+			$pageLayout->getTopNewsRestrictionSetting();
+			$pageLayout->getOrderSettings();
+			$pageLayout->getCategorySettings();
+			$pageLayout->getArchiveSettings();
+			$pageLayout->getOffsetLimitSettings();
+			$pageLayout->getDetailPidSetting();
+			$pageLayout->getListPidSetting();
+			$pageLayout->getTagRestrictionSetting();
+			$this->getEventRestrictionSetting($pageLayout);
 		}
 	}
 
 	/**
 	 * Show the event restriction
 	 *
-	 * @param \GeorgRinger\News\Hooks\CmsLayout $cmsLayout
+	 * @param \GeorgRinger\News\Hooks\PageLayoutView $cmsLayout
 	 * @return void
 	 */
-	protected function getEventRestrictionSetting(\GeorgRinger\News\Hooks\CmsLayout $cmsLayout) {
+	protected function getEventRestrictionSetting(\GeorgRinger\News\Hooks\PageLayoutView $cmsLayout) {
 		$eventRestriction = (int)$cmsLayout->getFieldFromFlexform('settings.eventRestriction');
 		if ($eventRestriction > 0) {
 			$cmsLayout->tableData[] = array(
