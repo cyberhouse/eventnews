@@ -4,7 +4,7 @@ namespace GeorgRinger\EventNews\Hooks;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-class T3libBefunc extends \GeorgRinger\News\Hooks\T3libBefunc {
+class T3libBefunc extends \GeorgRinger\News\Hooks\BackendUtility {
 
 	protected $eventRestrictionField = '<settings.eventRestriction>
 						<TCEforms>
