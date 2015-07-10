@@ -60,4 +60,4 @@ news events
 	UsersManual/Index
 	AdministratorManual/Index
 	NeedSupport/Index
-	Thanks	/Index
+	Thanks/Index

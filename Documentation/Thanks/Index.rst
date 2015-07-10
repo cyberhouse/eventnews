@@ -8,9 +8,13 @@
 
 .. _thanks:
 
-Thanks a lot!
-=============
+Sponsors
+========
 
-The development has been sponsored by http://www.i-kiu.at/!
+The development has been sponsored by:
+
+- i-kiu http://www.i-kiu.at/
+- TUM (Technical University of Munich) http://tum.de/
+- Hochschule Darmstadt - University of Applied Sciences https://www.h-da.de/
 
 Additional thanks to the TYPO3 Documentation team for their awesome work!
