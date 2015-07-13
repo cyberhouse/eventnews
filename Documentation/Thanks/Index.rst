@@ -13,7 +13,6 @@ Sponsors
 
 The development has been sponsored by:
 
-- i-kiu http://www.i-kiu.at/
 - TUM (Technical University of Munich) http://tum.de/
 - Hochschule Darmstadt - University of Applied Sciences https://www.h-da.de/
 
