@@ -43,8 +43,10 @@ class BackendUtility extends \GeorgRinger\News\Hooks\BackendUtility {
 
 		if ($params['selectedView'] === 'News->month' || $params['selectedView'] === 'News->list') {
 			$eventRestrictionXml = GeneralUtility::xml2array($this->eventRestrictionField);
-			$params['dataStructure']['sheets']['sDEF']['ROOT']['el'] = $params['dataStructure']['sheets']['sDEF']['ROOT']['el'] + array(
+			if (is_array($params['dataStructure']['sheets']['sDEF']['ROOT']['el'])) {
+				$params['dataStructure']['sheets']['sDEF']['ROOT']['el'] = $params['dataStructure']['sheets']['sDEF']['ROOT']['el'] + array(
 					'settings.eventRestriction' => $eventRestrictionXml);
+			}
 		}
 	}
 }
