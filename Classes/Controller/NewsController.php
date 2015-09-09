@@ -30,7 +30,7 @@ class Tx_Eventnews_Controller_NewsController extends \GeorgRinger\News\Controlle
 	public function monthAction(\GeorgRinger\Eventnews\Domain\Model\Dto\SearchDemand $search = NULL, array $overwriteDemand = NULL) {
 		$demand = $this->getDemand($search, $overwriteDemand);
 		$newsRecords = $this->newsRepository->findDemanded($demand);
-		$categories = explode(',', $this->settings['categories']);
+		$categories = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',', $this->settings['categories'], TRUE);
 
 		$assignedValues = array(
 			'search' => $search,
@@ -40,7 +40,7 @@ class Tx_Eventnews_Controller_NewsController extends \GeorgRinger\News\Controlle
 			'currentPageId' => $GLOBALS['TSFE']->id,
 			'allOrganizers' => $this->organizerRepository->findByStartingPoint($this->settings['startingpoint']),
 			'allLocations' => $this->locationRepository->findByStartingPoint($this->settings['startingpoint']),
-			'allCategories' => $this->categoryRepository->findByIdList($categories),
+			'allCategories' => empty($categories) ? array() : $this->categoryRepository->findByIdList($categories),
 			'previousMonthData' => $this->getDateConfig($demand, '-1 month'),
 			'nextMonthData' => $this->getDateConfig($demand, '+1 month'),
 			'currentMonthData' => $this->getDateConfig($demand),
