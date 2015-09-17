@@ -109,9 +109,9 @@
 	<div class="col-md-12" style="border: 1px solid:#ccc;">
 		<strong><n:link newsItem="{n}" settings="{settings}">{n.title}</n:link> | {f:format.date(date:n.datetime.date,format:'%d.%m')}</strong>
 		<ul>
-			<f:if condition="{n.organisator}">
-				<li><strong>orga</strong>: {n.organisator.title}
-					<small>(uid: {n.organisator.uid})</small>
+			<f:if condition="{n.organizer}">
+				<li><strong>orga</strong>: {n.organizer.title}
+					<small>(uid: {n.organizer.uid})</small>
 				</li>
 			</f:if>
 			<f:if condition="{n.location}">
