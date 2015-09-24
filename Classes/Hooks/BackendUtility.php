@@ -1,6 +1,6 @@
 <?php
 
-namespace GeorgRinger\EventNews\Hooks;
+namespace GeorgRinger\Eventnews\Hooks;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 

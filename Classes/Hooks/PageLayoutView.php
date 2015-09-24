@@ -1,6 +1,6 @@
 <?php
 
-namespace GeorgRinger\EventNews\Hooks;
+namespace GeorgRinger\Eventnews\Hooks;
 
 	/*
 	 * This file is part of the TYPO3 CMS project.
@@ -18,7 +18,7 @@ namespace GeorgRinger\EventNews\Hooks;
 /**
  * Class PageLayoutView
  *
- * @package GeorgRinger\EventNews\Hooks
+ * @package GeorgRinger\Eventnews\Hooks
  */
 class PageLayoutView {
 
