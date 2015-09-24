@@ -11,7 +11,7 @@
   },
   "autoload": {
     "psr-4": {
-      "GeorgRinger\\ventnews\\": "Classes"
+      "GeorgRinger\\EventNews\\": "Classes"
     }
   },
   "replace": {
