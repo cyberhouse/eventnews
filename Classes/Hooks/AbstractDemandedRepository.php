@@ -52,6 +52,7 @@ class AbstractDemandedRepository {
 		if ($eventRestriction === Demand::EVENT_RESTRICTION_NO_EVENTS) {
 			$constraints[] = $query->equals('isEvent', 0);
 		} elseif ($eventRestriction === Demand::EVENT_RESTRICTION_ONLY_EVENTS) {
+			$constraints[] = $query->equals('isEvent', 1);
 
 			$dateField = $demand->getDateField();
 			$begin = mktime(0, 0, 0, $demand->getMonth(), 1, $demand->getYear());
