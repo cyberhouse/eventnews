@@ -13,7 +13,7 @@ $fields = array(
 		)
 	),
 	'full_day' => array(
-		'exclude' => 1,gi
+		'exclude' => 1,
 		'displayCond' => 'FIELD:is_event:>:0',
 		'label' => 'LLL:EXT:eventnews/Resources/Private/Language/locallang_db.xlf:tx_eventnews_domain_model_news.full_day',
 		'config' => array(
