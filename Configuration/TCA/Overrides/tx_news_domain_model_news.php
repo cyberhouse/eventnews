@@ -14,6 +14,7 @@ $fields = array(
 	),
 	'full_day' => array(
 		'exclude' => 1,
+		'displayCond' => 'FIELD:is_event:=:1',
 		'label' => 'LLL:EXT:eventnews/Resources/Private/Language/locallang_db.xlf:tx_eventnews_domain_model_news.full_day',
 		'config' => array(
 			'type' => 'check',
@@ -22,6 +23,7 @@ $fields = array(
 	),
 	'event_end' => array(
 		'exclude' => 1,
+		'displayCond' => 'FIELD:is_event:=:1',
 		'label' => 'LLL:EXT:eventnews/Resources/Private/Language/locallang_db.xlf:tx_eventnews_domain_model_news.event_end',
 		'config' => array(
 			'type' => 'input',
@@ -32,6 +34,7 @@ $fields = array(
 	),
 	'organizer' => array(
 		'exclude' => 1,
+		'displayCond' => 'FIELD:is_event:=:1',
 		'label' => 'LLL:EXT:eventnews/Resources/Private/Language/locallang_db.xlf:tx_eventnews_domain_model_organizer',
 		'config' => array(
 			'type' => 'select',
@@ -46,6 +49,7 @@ $fields = array(
 	),
 	'location' => array(
 		'exclude' => 1,
+		'displayCond' => 'FIELD:is_event:=:1',
 		'label' => 'LLL:EXT:eventnews/Resources/Private/Language/locallang_db.xlf:tx_eventnews_domain_model_location',
 		'config' => array(
 			'type' => 'select',
@@ -60,6 +64,7 @@ $fields = array(
 	),
 	'organizer_simple' => array(
 		'exclude' => 1,
+		'displayCond' => 'FIELD:is_event:=:1',
 		'label' => 'LLL:EXT:eventnews/Resources/Private/Language/locallang_db.xlf:tx_news_domain_model_news.organizer_simple',
 		'config' => array(
 			'type' => 'input',
@@ -68,6 +73,7 @@ $fields = array(
 	),
 	'location_simple' => array(
 		'exclude' => 1,
+		'displayCond' => 'FIELD:is_event:=:1',
 		'label' => 'LLL:EXT:eventnews/Resources/Private/Language/locallang_db.xlf:tx_news_domain_model_news.location_simple',
 		'config' => array(
 			'type' => 'input',
