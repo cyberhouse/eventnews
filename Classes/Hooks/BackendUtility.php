@@ -36,7 +36,6 @@ class BackendUtility extends \GeorgRinger\News\Hooks\BackendUtility {
 	public function updateFlexforms(&$params, &$reference) {
 		if ($params['selectedView'] === 'News->month') {
 			$removedFields = $this->removedFieldsInListView;
-			$removedFields['sDEF'] .= ',timeRestriction,timeRestrictionHigh';
 
 			$this->deleteFromStructure($params['dataStructure'], $removedFields);
 		}
