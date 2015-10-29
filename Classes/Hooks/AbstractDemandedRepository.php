@@ -64,47 +64,49 @@ class AbstractDemandedRepository
             unset($constraints['datetime']);
             $constraints[] = $query->equals('isEvent', 1);
 
-            $dateField = $demand->getDateField();
-            $begin = mktime(0, 0, 0, $demand->getMonth(), 1, $demand->getYear());
-            $end = mktime(23, 59, 59, ($demand->getMonth() + 1), 0, $demand->getYear());
+            if ($demand->getMonth() && $demand->getYear()) {
+                $dateField = $demand->getDateField();
+                $begin = mktime(0, 0, 0, $demand->getMonth(), 1, $demand->getYear());
+                $end = mktime(23, 59, 59, ($demand->getMonth() + 1), 0, $demand->getYear());
 
-            $eventsWithNoEndDate = array(
-                $query->logicalAnd(
-                    $query->greaterThanOrEqual($demand->getDateField(), $begin),
-                    $query->lessThanOrEqual($demand->getDateField(), $end)
-                )
-            );
+                $eventsWithNoEndDate = array(
+                    $query->logicalAnd(
+                        $query->greaterThanOrEqual($demand->getDateField(), $begin),
+                        $query->lessThanOrEqual($demand->getDateField(), $end)
+                    )
+                );
 
-            $eventsWithEndDate = array(
-                // event inside a month, e.g. 3.3 - 8.3
-                $query->logicalAnd(
-                    $query->greaterThanOrEqual('datetime', $begin),
-                    $query->lessThanOrEqual('datetime', $end),
-                    $query->lessThanOrEqual('eventEnd', $end)
-                ),
-                // event expanded from month before to month after
-                $query->logicalAnd(
-                    $query->lessThanOrEqual($dateField, $begin),
-                    $query->greaterThanOrEqual('eventEnd', $end)
-                ),
-                // event from month before to mid of month
-                $query->logicalAnd(
-                    $query->lessThanOrEqual($dateField, $begin),
-                    $query->greaterThanOrEqual('eventEnd', $begin)
-                ),
-                // event from mid month to next month
-                $query->logicalAnd(
-                    $query->lessThanOrEqual($dateField, $end),
-                    $query->greaterThanOrEqual('eventEnd', $end)
-                )
-            );
+                $eventsWithEndDate = array(
+                    // event inside a month, e.g. 3.3 - 8.3
+                    $query->logicalAnd(
+                        $query->greaterThanOrEqual('datetime', $begin),
+                        $query->lessThanOrEqual('datetime', $end),
+                        $query->lessThanOrEqual('eventEnd', $end)
+                    ),
+                    // event expanded from month before to month after
+                    $query->logicalAnd(
+                        $query->lessThanOrEqual($dateField, $begin),
+                        $query->greaterThanOrEqual('eventEnd', $end)
+                    ),
+                    // event from month before to mid of month
+                    $query->logicalAnd(
+                        $query->lessThanOrEqual($dateField, $begin),
+                        $query->greaterThanOrEqual('eventEnd', $begin)
+                    ),
+                    // event from mid month to next month
+                    $query->logicalAnd(
+                        $query->lessThanOrEqual($dateField, $end),
+                        $query->greaterThanOrEqual('eventEnd', $end)
+                    )
+                );
 
-            $dateConstraints1 = array(
-                $query->logicalAnd($eventsWithNoEndDate),
-                $query->logicalOr($eventsWithEndDate)
-            );
+                $dateConstraints1 = array(
+                    $query->logicalAnd($eventsWithNoEndDate),
+                    $query->logicalOr($eventsWithEndDate)
+                );
 
-            $constraints['datetime'] = $query->logicalOr($dateConstraints1);
+                $constraints['datetime'] = $query->logicalOr($dateConstraints1);
+            }
 
             $organizers = $demand->getOrganizers();
             if (!empty($organizers)) {
