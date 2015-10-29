@@ -44,14 +44,15 @@ class AbstractDemandedRepository {
 	 * @return void
 	 */
 	protected function updateEventConstraints(Demand $demand, $respectEnableFields, \TYPO3\CMS\Extbase\Persistence\QueryInterface $query, array &$constraints) {
-		// reset datetime constraint
-		unset($constraints['datetime']);
 
 		$eventRestriction = $demand->getEventRestriction();
 
 		if ($eventRestriction === Demand::EVENT_RESTRICTION_NO_EVENTS) {
 			$constraints[] = $query->equals('isEvent', 0);
 		} elseif ($eventRestriction === Demand::EVENT_RESTRICTION_ONLY_EVENTS) {
+			// reset datetime constraint
+			unset($constraints['datetime']);
+
 			$constraints[] = $query->equals('isEvent', 1);
 
 			$dateField = $demand->getDateField();
