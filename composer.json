@@ -1,5 +1,5 @@
 {
-  "name": "georgringer/eventnews",
+  "name": "dp-michaelhuebe/eventnews",
   "type": "typo3-cms-extension",
   "description": "Extend EXT:news with event and calendar functionality",
   "homepage": "http://typo3.org",
@@ -7,7 +7,7 @@
     "GPL-2.0+"
   ],
   "require": {
-    "typo3/cms-core": ">=6.2.1,<8.0"
+    "typo3/cms-core": ">=7.6.0,<8.0"
   },
   "autoload": {
     "psr-4": {
