@@ -1,5 +1,7 @@
 <?php
 
+namespace GeorgRinger\Eventnews\Controller;
+
 /*
  * This file is part of the TYPO3 CMS project.
  *
@@ -14,9 +16,9 @@
  */
 
 /**
- * Class Tx_Eventnews_Controller_NewsController
+ * Class GeorgRinger\Eventnews\Controller\NewsController
  */
-class Tx_Eventnews_Controller_NewsController extends \GeorgRinger\News\Controller\NewsController {
+class NewsController extends \GeorgRinger\News\Controller\NewsController {
 
 	/**
 	 * Month view
@@ -126,7 +128,7 @@ class Tx_Eventnews_Controller_NewsController extends \GeorgRinger\News\Controlle
 	/** @var \GeorgRinger\Eventnews\Domain\Repository\LocationRepository */
 	protected $locationRepository;
 
-	/** @var \Tx_News_Domain_Repository_CategoryRepository */
+	/** @var \GeorgRinger\News\Domain\Repository\CategoryRepository */
 	protected $categoryRepository;
 
 }
