@@ -1,7 +1,7 @@
 <?php
 
 $EM_CONF[$_EXTKEY] = array(
-	'title' => 'news events',
+	'title' => 'News events',
 	'description' => 'Events for news',
 	'category' => 'plugin',
 	'author' => 'Georg Ringer',
