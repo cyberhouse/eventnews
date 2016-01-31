@@ -7,7 +7,7 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractConditionViewHelper;
 class DayCompareViewHelper extends AbstractConditionViewHelper {
 
 	/**
-	 * @param \Tx_News_Domain_Model_News $newsItem
+	 * @param \GeorgRinger\News\Domain\Model\News $newsItem
 	 * @param \GeorgRinger\Eventnews\Domain\Model\Dto\Demand $demand
 	 * @return mixed
 	 */
