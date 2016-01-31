@@ -72,6 +72,7 @@ class Tx_Eventnews_Controller_NewsController extends \GeorgRinger\News\Controlle
 		if (!is_null($search)) {
 			$demand->setLocations($search->getLocations());
 			$demand->setOrganizers($search->getOrganizers());
+			$demand->setCategories($search->getCategories());
 		}
 		return $demand;
 	}

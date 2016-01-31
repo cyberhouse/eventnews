@@ -58,7 +58,7 @@ class SearchDemand {
 	 * @return array
 	 */
 	public function getCategories() {
-		return $this->categories;
+		return $this->getNonEmptyArrayValues($this->categories);
 	}
 
 	/**
@@ -67,4 +67,23 @@ class SearchDemand {
 	public function setCategories($categories) {
 		$this->categories = $categories;
 	}
+
+    /**
+     * Remove empty value entries
+     *
+     * @param $array
+     * @return array
+     */
+    public function getNonEmptyArrayValues($array)
+    {
+        $out = array();
+        if (is_array($array)) {
+            foreach ($array as $k => $v) {
+                if (!empty($v)) {
+                    $out[$k] = $v;
+                }
+            }
+        }
+        return $out;
+    }
 }
