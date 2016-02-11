@@ -18,117 +18,100 @@ namespace GeorgRinger\Eventnews\Controller;
 /**
  * Class GeorgRinger\Eventnews\Controller\NewsController
  */
-class NewsController extends \GeorgRinger\News\Controller\NewsController {
+class NewsController extends \GeorgRinger\News\Controller\NewsController
+{
 
-	/**
-	 * Month view
-	 *
-	 * @param \GeorgRinger\Eventnews\Domain\Model\Dto\SearchDemand $search
-	 * @param array $overwriteDemand
-	 * @ignorevalidation $search
-	 * @dontverifyrequesthash
-	 * @return void
-	 */
-	public function monthAction(\GeorgRinger\Eventnews\Domain\Model\Dto\SearchDemand $search = NULL, array $overwriteDemand = NULL) {
-		$demand = $this->getDemand($search, $overwriteDemand);
-		$newsRecords = $this->newsRepository->findDemanded($demand);
-		$categories = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',', $this->settings['categories'], TRUE);
+    /**
+     * Month view
+     *
+     * @param \GeorgRinger\Eventnews\Domain\Model\Dto\SearchDemand $search
+     * @param array $overwriteDemand
+     * @ignorevalidation $search
+     * @dontverifyrequesthash
+     * @return void
+     */
+    public function monthAction(
+        \GeorgRinger\Eventnews\Domain\Model\Dto\SearchDemand $search = null,
+        array $overwriteDemand = null
+    ) {
+        $demand = $this->getDemand($search, $overwriteDemand);
+        $newsRecords = $this->newsRepository->findDemanded($demand);
+        $categories = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',', $this->settings['categories'], true);
 
-		$assignedValues = array(
-			'search' => $search,
-			'news' => $newsRecords,
-			'overwriteDemand' => $overwriteDemand,
-			'demand' => $demand,
-			'currentPageId' => $GLOBALS['TSFE']->id,
-			'allOrganizers' => $this->organizerRepository->findByStartingPoint($this->settings['startingpoint']),
-			'allLocations' => $this->locationRepository->findByStartingPoint($this->settings['startingpoint']),
-			'allCategories' => empty($categories) ? array() : $this->categoryRepository->findByIdList($categories),
-			'previousMonthData' => $this->getDateConfig($demand, '-1 month'),
-			'nextMonthData' => $this->getDateConfig($demand, '+1 month'),
-			'currentMonthData' => $this->getDateConfig($demand),
-		);
+        /** @var \GeorgRinger\News\Domain\Repository\CategoryRepository $categoryRepository */
+        $categoryRepository = $this->objectManager->get(\GeorgRinger\News\Domain\Repository\CategoryRepository::class);
+        /** @var \GeorgRinger\Eventnews\Domain\Repository\LocationRepository $locationRepository */
+        $locationRepository = $this->objectManager->get(\GeorgRinger\Eventnews\Domain\Repository\LocationRepository::class);
+        /** @var \GeorgRinger\Eventnews\Domain\Repository\OrganizerRepository $organizerRepository */
+        $organizerRepository = $this->objectManager->get(\GeorgRinger\Eventnews\Domain\Repository\OrganizerRepository::class);
 
-		$this->view->assignMultiple($assignedValues);
-	}
+        $assignedValues = array(
+            'search' => $search,
+            'news' => $newsRecords,
+            'overwriteDemand' => $overwriteDemand,
+            'demand' => $demand,
+            'currentPageId' => $GLOBALS['TSFE']->id,
+            'allOrganizers' => $organizerRepository->findByStartingPoint($this->settings['startingpoint']),
+            'allLocations' => $locationRepository->findByStartingPoint($this->settings['startingpoint']),
+            'allCategories' => empty($categories) ? array() : $categoryRepository->findByIdList($categories),
+            'previousMonthData' => $this->getDateConfig($demand, '-1 month'),
+            'nextMonthData' => $this->getDateConfig($demand, '+1 month'),
+            'currentMonthData' => $this->getDateConfig($demand),
+        );
 
-	/**
-	 * @param \GeorgRinger\Eventnews\Domain\Model\Dto\SearchDemand $search
-	 * @param array $overwriteDemand
-	 * @return \GeorgRinger\Eventnews\Domain\Model\Dto\Demand
-	 */
-	protected function getDemand(\GeorgRinger\Eventnews\Domain\Model\Dto\SearchDemand $search = NULL, array $overwriteDemand = NULL) {
-		/** @var \GeorgRinger\Eventnews\Domain\Model\Dto\Demand $demand */
-		$demand = $this->createDemandObjectFromSettings($this->settings, 'GeorgRinger\\Eventnews\\Domain\\Model\\Dto\\Demand');
-		if (is_array($overwriteDemand) && !empty($overwriteDemand)) {
-			$demand = $this->overwriteDemandObject($demand, $overwriteDemand);
-		}
-		if (!$demand->getMonth()) {
-			$demand->setMonth(date('n'));
-		}
-		if (!$demand->getYear()) {
-			$demand->setYear(date('Y'));
-		}
+        $this->view->assignMultiple($assignedValues);
+    }
 
-		$demand->setDay($overwriteDemand['day']);
+    /**
+     * @param \GeorgRinger\Eventnews\Domain\Model\Dto\SearchDemand $search
+     * @param array $overwriteDemand
+     * @return \GeorgRinger\Eventnews\Domain\Model\Dto\Demand
+     */
+    protected function getDemand(
+        \GeorgRinger\Eventnews\Domain\Model\Dto\SearchDemand $search = null,
+        array $overwriteDemand = null
+    ) {
+        /** @var \GeorgRinger\Eventnews\Domain\Model\Dto\Demand $demand */
+        $demand = $this->createDemandObjectFromSettings($this->settings,
+            'GeorgRinger\\Eventnews\\Domain\\Model\\Dto\\Demand');
+        if (is_array($overwriteDemand) && !empty($overwriteDemand)) {
+            $demand = $this->overwriteDemandObject($demand, $overwriteDemand);
+        }
+        if (!$demand->getMonth()) {
+            $demand->setMonth(date('n'));
+        }
+        if (!$demand->getYear()) {
+            $demand->setYear(date('Y'));
+        }
 
-		if (!is_null($search)) {
-			$demand->setLocations($search->getLocations());
-			$demand->setOrganizers($search->getOrganizers());
-		}
-		return $demand;
-	}
+        $demand->setDay($overwriteDemand['day']);
+
+        if (!is_null($search)) {
+            $demand->setLocations($search->getLocations());
+            $demand->setOrganizers($search->getOrganizers());
+        }
+        return $demand;
+    }
 
 
-	/**
-	 * Get a date configuration of the given time offset
-	 *
-	 * @param \GeorgRinger\Eventnews\Domain\Model\Dto\Demand $demand
-	 * @param string $timeString
-	 * @return array
-	 */
-	protected function getDateConfig($demand, $timeString = '') {
-		$date = \DateTime::createFromFormat('d.m.Y', sprintf('1.%s.%s', $demand->getMonth(), $demand->getYear()));
-		if (!empty($timeString)) {
-			$date->modify($timeString);
-		}
-		return array(
-			'date' => $date,
-			'month' => $date->format('n'),
-			'year' => $date->format('Y')
-		);
-	}
-
-	/**
-	 * @param \GeorgRinger\Eventnews\Domain\Repository\OrganizerRepository $organizerRepository
-	 * @return void
-	 */
-	public function injectOrganizerRepository(\GeorgRinger\Eventnews\Domain\Repository\OrganizerRepository $organizerRepository) {
-		$this->organizerRepository = $organizerRepository;
-	}
-
-	/**
-	 * @param \GeorgRinger\Eventnews\Domain\Repository\LocationRepository $locationRepository
-	 * @return void
-	 */
-	public function injectLocationRepository(\GeorgRinger\Eventnews\Domain\Repository\LocationRepository $locationRepository) {
-		$this->locationRepository = $locationRepository;
-	}
-
-	/**
-	 * @param \GeorgRinger\News\Domain\Repository\CategoryRepository $categoryRepository
-	 * @return void
-	 */
-	public function injectCategoryRepository(\GeorgRinger\News\Domain\Repository\CategoryRepository $categoryRepository) {
-		$this->categoryRepository = $categoryRepository;
-	}
-
-	/** @var \GeorgRinger\Eventnews\Domain\Repository\OrganizerRepository */
-	protected $organizerRepository;
-
-	/** @var \GeorgRinger\Eventnews\Domain\Repository\LocationRepository */
-	protected $locationRepository;
-
-	/** @var \GeorgRinger\News\Domain\Repository\CategoryRepository */
-	protected $categoryRepository;
+    /**
+     * Get a date configuration of the given time offset
+     *
+     * @param \GeorgRinger\Eventnews\Domain\Model\Dto\Demand $demand
+     * @param string $timeString
+     * @return array
+     */
+    protected function getDateConfig($demand, $timeString = '')
+    {
+        $date = \DateTime::createFromFormat('d.m.Y', sprintf('1.%s.%s', $demand->getMonth(), $demand->getYear()));
+        if (!empty($timeString)) {
+            $date->modify($timeString);
+        }
+        return array(
+            'date' => $date,
+            'month' => $date->format('n'),
+            'year' => $date->format('Y')
+        );
+    }
 
 }
