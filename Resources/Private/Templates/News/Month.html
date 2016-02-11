@@ -1,35 +1,46 @@
-{namespace events=GeorgRinger\Eventnews\ViewHelpers}
-{namespace n=GeorgRinger\News\ViewHelpers}
+{namespace events=GeorgRinger\Eventnews\ViewHelpers}{namespace n=GeorgRinger\News\ViewHelpers}
 <f:layout name="General" />
 
 <f:section name="content">
 	<div class="row">
 		<div class="col-md-2">
-			<h3><f:translate key="filter" /></h3>
+			<h3>
+				<f:translate key="filter" />
+			</h3>
 			<f:form method="post" action="month" object="{search}" name="search" arguments="{overwriteDemand:overwriteDemand}">
 				<input type="hidden" name="id" value="{currentPageId}" />
 
-				<h4><f:translate key="organizers" /></h4>
+				<h4>
+					<f:translate key="organizers" />
+				</h4>
 				<ul style="list-style: none">
-					<f:for each="{allOrganizers}" as="organizer">
-						<li>
-							<label>
-								<f:form.checkbox property="organizers.{organizer.uid}" value="{organizer.uid}" />
-								{organizer.title} </label>
-						</li>
-					</f:for>
+					<events:filter.organizer organizers="{allOrganizers}" news="{news}" as="filteredOrganizers">
+						<f:for each="{filteredOrganizers}" as="organizer">
+							<li>
+								<label>
+									<f:form.checkbox property="organizers.{organizer.uid}" value="{organizer.uid}" />
+									{organizer.title} </label>
+							</li>
+						</f:for>
+					</events:filter.organizer>
 				</ul>
-				<h4><f:translate key="locations" /></h4>
+				<h4>
+					<f:translate key="locations" />
+				</h4>
 				<ul style="list-style: none">
-					<f:for each="{allLocations}" as="location">
-						<li>
-							<label>
-								<f:form.checkbox property="locations.{location.uid}" value="{location.uid}" />
-								{location.title} </label>
-						</li>
-					</f:for>
+					<events:filter.location locations="{allLocations}" news="{news}" as="filteredEvents">
+						<f:for each="{filteredEvents}" as="location">
+							<li>
+								<label>
+									<f:form.checkbox property="locations.{location.uid}" value="{location.uid}" />
+									{location.title} </label>
+							</li>
+						</f:for>
+					</events:filter.location>
 				</ul>
-				<h4><f:translate key="categories" /></h4>
+				<h4>
+					<f:translate key="categories" />
+				</h4>
 				<ul style="list-style: none">
 					<f:for each="{allCategories}" as="category">
 						<li>
@@ -44,7 +55,9 @@
 
 		</div>
 		<div class="col-md-7">
-			<h2><f:translate key="calendar" /></h2>
+			<h2>
+				<f:translate key="calendar" />
+			</h2>
 			<events:calendar newsList="{news}" demand="{demand}" firstDayOfWeek="1">
 				<table class="table">
 					<tr class="title">
@@ -82,7 +95,9 @@
 			</events:calendar>
 		</div>
 		<div class="col-md-3">
-			<h2><f:translate key="list" /></h2>
+			<h2>
+				<f:translate key="list" />
+			</h2>
 			<div class="row">
 				<f:for each="{news}" as="n">
 					<f:if condition="{overwriteDemand.day}">
@@ -106,21 +121,29 @@
 
 <f:section name="listItem">
 	<div class="col-md-12" style="border: 1px solid #ccc;">
-		<strong><n:link newsItem="{n}" settings="{settings}">{n.title}</n:link> | {f:format.date(date:n.datetime.date,format:'%d.%m')}</strong>
+		<strong>
+			<n:link newsItem="{n}" settings="{settings}">{n.title}</n:link>
+			| {f:format.date(date:n.datetime.date,format:'%d.%m')}</strong>
 		<ul>
 			<f:if condition="{n.organizer}">
-				<li><strong><f:translate key="organizer" /></strong>: {n.organizer.title}
+				<li><strong>
+					<f:translate key="organizer" />
+				</strong>: {n.organizer.title}
 					<small>(uid: {n.organizer.uid})</small>
 				</li>
 			</f:if>
 			<f:if condition="{n.location}">
-				<li><strong><f:translate key="location" /></strong>: {n.location.title}
+				<li><strong>
+					<f:translate key="location" />
+				</strong>: {n.location.title}
 					<small>(uid: {n.location.uid})</small>
 				</li>
 			</f:if>
 			<f:if condition="{n.eventEnd}">
 				<li>
-					<strong><f:translate key="event_end" /></strong>: {f:format.date(date:n.eventEnd.date,format:'%d.%m.%Y')}
+					<strong>
+						<f:translate key="event_end" />
+					</strong>: {f:format.date(date:n.eventEnd.date,format:'%d.%m.%Y')}
 				</li>
 			</f:if>
 		</ul>

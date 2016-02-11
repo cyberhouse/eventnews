@@ -18,8 +18,7 @@ namespace GeorgRinger\Eventnews\Controller;
 /**
  * Class GeorgRinger\Eventnews\Controller\NewsController
  */
-class NewsController extends \GeorgRinger\News\Controller\NewsController
-{
+class NewsController extends \GeorgRinger\News\Controller\NewsController {
 
     /**
      * Month view
