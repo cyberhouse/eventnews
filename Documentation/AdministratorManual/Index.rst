@@ -38,3 +38,11 @@ Using your own templates
 
 If you are using your own templates, just copy the template *EXT:eventnews/Resources/Private/Templates/Month.html* into the same directory
 where also the files like *List.html* or *Detail.html* are saved.
+
+Configuration
+-------------
+
+The following TypoScript options are available: ::
+
+	startingpointLocation
+	startingpointOrganizer

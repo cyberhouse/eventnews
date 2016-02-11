@@ -45,14 +45,17 @@ class NewsController extends \GeorgRinger\News\Controller\NewsController
         /** @var \GeorgRinger\Eventnews\Domain\Repository\OrganizerRepository $organizerRepository */
         $organizerRepository = $this->objectManager->get(\GeorgRinger\Eventnews\Domain\Repository\OrganizerRepository::class);
 
+        $organizerPidList = $this->settings['startingpointOrganizer'] ? $this->settings['startingpointOrganizer'] : $this->settings['startingpoint'];
+        $locationPidList = $this->settings['startingpointLocation'] ? $this->settings['startingpointLocation'] : $this->settings['startingpoint'];
+
         $assignedValues = array(
             'search' => $search,
             'news' => $newsRecords,
             'overwriteDemand' => $overwriteDemand,
             'demand' => $demand,
             'currentPageId' => $GLOBALS['TSFE']->id,
-            'allOrganizers' => $organizerRepository->findByStartingPoint($this->settings['startingpoint']),
-            'allLocations' => $locationRepository->findByStartingPoint($this->settings['startingpoint']),
+            'allOrganizers' => $organizerRepository->findByStartingPoint($organizerPidList),
+            'allLocations' => $locationRepository->findByStartingPoint($locationPidList),
             'allCategories' => empty($categories) ? array() : $categoryRepository->findByIdList($categories),
             'previousMonthData' => $this->getDateConfig($demand, '-1 month'),
             'nextMonthData' => $this->getDateConfig($demand, '+1 month'),

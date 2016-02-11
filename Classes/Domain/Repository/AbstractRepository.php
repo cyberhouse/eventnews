@@ -18,42 +18,46 @@ namespace GeorgRinger\Eventnews\Domain\Repository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
-class AbstractRepository extends Repository {
+class AbstractRepository extends Repository
+{
 
-	/**
-	 * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
-	 */
-	public function findAll() {
-		$query = $this->getQuery();
+    /**
+     * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     */
+    public function findAll()
+    {
+        $query = $this->getQuery();
 
-		return $query->execute();
-	}
+        return $query->execute();
+    }
 
-	/**
-	 * @param $pidList
-	 * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
-	 */
-	public function findByStartingPoint($pidList) {
-		$query = $this->getQuery();
+    /**
+     * @param $pidList
+     * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     */
+    public function findByStartingPoint($pidList)
+    {
+        $query = $this->getQuery();
 
-		$pidList = GeneralUtility::intExplode(',', $pidList, TRUE);
-		if (!empty($pidList)) {
-			return $query->matching(
-				$query->logicalAnd(
-					$query->in('pid', $pidList)
-				))->execute();
-		}
+        $pidList = GeneralUtility::intExplode(',', $pidList, true);
+        if (!empty($pidList)) {
+            return $query->matching(
+                $query->logicalAnd(
+                    $query->in('pid', $pidList)
+                ))->execute();
+        }
 
-		return $query->execute();
-	}
+        return $query->execute();
+    }
 
-	/**
-	 * @return \TYPO3\CMS\Extbase\Persistence\QueryInterface
-	 */
-	protected function getQuery() {
-		$query = $this->createQuery();
-		$query->getQuerySettings()->setRespectStoragePage(FALSE);
+    /**
+     * @return \TYPO3\CMS\Extbase\Persistence\QueryInterface
+     */
+    protected function getQuery()
+    {
+        $query = $this->createQuery();
+        $query->getQuerySettings()->setRespectStoragePage(false);
 
-		return $query;
-	}
+        return $query;
+    }
 }
