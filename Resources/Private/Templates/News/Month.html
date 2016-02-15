@@ -11,7 +11,7 @@
 				<input type="hidden" name="id" value="{currentPageId}" />
 
 				<h4>
-					<f:translate key="organizers" />
+					<f:translate key="organizers" extensionName="eventnews" />
 				</h4>
 				<ul style="list-style: none">
 					<events:filter.organizer organizers="{allOrganizers}" news="{news}" as="filteredOrganizers">
@@ -25,7 +25,7 @@
 					</events:filter.organizer>
 				</ul>
 				<h4>
-					<f:translate key="locations" />
+					<f:translate key="locations" extensionName="eventnews" />
 				</h4>
 				<ul style="list-style: none">
 					<events:filter.location locations="{allLocations}" news="{news}" as="filteredEvents">
@@ -39,7 +39,7 @@
 					</events:filter.location>
 				</ul>
 				<h4>
-					<f:translate key="categories" />
+					<f:translate key="categories" extensionName="eventnews" />
 				</h4>
 				<ul style="list-style: none">
 					<f:for each="{allCategories}" as="category">
@@ -50,13 +50,13 @@
 						</li>
 					</f:for>
 				</ul>
-				<f:form.submit value="{f:translate(key:'filter_submit')}" class="btn btn-default" />
+				<f:form.submit value="{f:translate(key:'filter_submit',extensionName:'eventnews')}" class="btn btn-default" />
 			</f:form>
 
 		</div>
 		<div class="col-md-7">
 			<h2>
-				<f:translate key="calendar" />
+				<f:translate key="calendar" extensionName="eventnews" />
 			</h2>
 			<events:calendar newsList="{news}" demand="{demand}" firstDayOfWeek="1">
 				<table class="table">
@@ -96,7 +96,7 @@
 		</div>
 		<div class="col-md-3">
 			<h2>
-				<f:translate key="list" />
+				<f:translate key="list" extensionName="eventnews" />
 			</h2>
 			<div class="row">
 				<f:for each="{news}" as="n">
@@ -127,14 +127,14 @@
 		<ul>
 			<f:if condition="{n.organizer}">
 				<li><strong>
-					<f:translate key="organizer" />
+					<f:translate key="organizer" extensionName="eventnews" />
 				</strong>: {n.organizer.title}
 					<small>(uid: {n.organizer.uid})</small>
 				</li>
 			</f:if>
 			<f:if condition="{n.location}">
 				<li><strong>
-					<f:translate key="location" />
+					<f:translate key="location" extensionName="eventnews" />
 				</strong>: {n.location.title}
 					<small>(uid: {n.location.uid})</small>
 				</li>
@@ -142,7 +142,7 @@
 			<f:if condition="{n.eventEnd}">
 				<li>
 					<strong>
-						<f:translate key="event_end" />
+						<f:translate key="event_end" extensionName="eventnews" />
 					</strong>: {f:format.date(date:n.eventEnd.date,format:'%d.%m.%Y')}
 				</li>
 			</f:if>
