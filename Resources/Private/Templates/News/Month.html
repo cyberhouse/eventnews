@@ -50,6 +50,20 @@
 						</li>
 					</f:for>
 				</ul>
+
+				<div class="form-group">
+					<label for="searchDateFrom">
+						<f:translate key="searchDateFrom" extensionName="eventnews" />
+					</label>
+					<f:form.textfield property="searchDateFrom" id="searchDateFrom" type="date" />
+				</div>
+				<div class="form-group">
+					<label for="searchDateTo">
+						<f:translate key="searchDateTo" extensionName="eventnews" />
+					</label>
+					<f:form.textfield property="searchDateTo" id="searchDateTo" type="date" />
+				</div>
+
 				<f:form.submit value="{f:translate(key:'filter_submit',extensionName:'eventnews')}" class="btn btn-default" />
 			</f:form>
 

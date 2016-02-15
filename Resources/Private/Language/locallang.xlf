@@ -49,6 +49,12 @@
 			<trans-unit id="event_end">
 				<source>Event end</source>
 			</trans-unit>
+			<trans-unit id="searchDateFrom">
+				<source>Startdatum</source>
+			</trans-unit>
+			<trans-unit id="searchDateTo">
+				<source>Enddatum</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

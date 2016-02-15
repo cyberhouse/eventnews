@@ -91,6 +91,8 @@ class NewsController extends \GeorgRinger\News\Controller\NewsController {
         if (!is_null($search)) {
             $demand->setLocations($search->getLocations());
             $demand->setOrganizers($search->getOrganizers());
+            $demand->setSearchDateFrom($search->getSearchDateFrom());
+            $demand->setSearchDateTo($search->getSearchDateTo());
         }
         return $demand;
     }
