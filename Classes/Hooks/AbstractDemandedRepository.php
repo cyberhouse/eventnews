@@ -50,52 +50,108 @@ class AbstractDemandedRepository {
 		if ($eventRestriction === Demand::EVENT_RESTRICTION_NO_EVENTS) {
 			$constraints[] = $query->equals('isEvent', 0);
 		} elseif ($eventRestriction === Demand::EVENT_RESTRICTION_ONLY_EVENTS) {
-			// reset datetime constraint
-			unset($constraints['datetime']);
-
 			$constraints[] = $query->equals('isEvent', 1);
 
-			$dateField = $demand->getDateField();
-			$begin = mktime(0, 0, 0, $demand->getMonth(), 1, $demand->getYear());
-			$end = mktime(23, 59, 59, ($demand->getMonth() + 1), 0, $demand->getYear());
+			$monthFromDemand = $demand->getMonth();
+			$yearFromDemand = $demand->getYear();
+			if (!empty($monthFromDemand) && !empty($yearFromDemand)) {
 
-			$eventsWithNoEndDate = array(
-				$query->logicalAnd(
-					$query->greaterThanOrEqual($demand->getDateField(), $begin),
-					$query->lessThanOrEqual($demand->getDateField(), $end)
-				)
-			);
+				// reset datetime constraint
+				unset($constraints['datetime']);
 
-			$eventsWithEndDate = array(
-				// event inside a month, e.g. 3.3 - 8.3
-				$query->logicalAnd(
-					$query->greaterThanOrEqual('datetime', $begin),
-					$query->lessThanOrEqual('datetime', $end),
-					$query->lessThanOrEqual('eventEnd', $end)
-				),
-				// event expanded from month before to month after
-				$query->logicalAnd(
-					$query->lessThanOrEqual($dateField, $begin),
-					$query->greaterThanOrEqual('eventEnd', $end)
-				),
-				// event from month before to mid of month
-				$query->logicalAnd(
-					$query->lessThanOrEqual($dateField, $begin),
-					$query->greaterThanOrEqual('eventEnd', $begin)
-				),
-				// event from mid month to next month
-				$query->logicalAnd(
-					$query->lessThanOrEqual($dateField, $end),
-					$query->greaterThanOrEqual('eventEnd', $end)
-				)
-			);
 
-			$dateConstraints1 = array(
-				$query->logicalAnd($eventsWithNoEndDate),
-				$query->logicalOr($eventsWithEndDate)
-			);
+				$dateField = $demand->getDateField();
+				$begin = mktime(0, 0, 0, $demand->getMonth(), 1, $demand->getYear());
+				$end = mktime(23, 59, 59, ($demand->getMonth() + 1), 0, $demand->getYear());
 
-			$constraints['datetime'] = $query->logicalOr($dateConstraints1);
+				$eventsWithNoEndDate = array(
+					$query->logicalAnd(
+						$query->greaterThanOrEqual($demand->getDateField(), $begin),
+						$query->lessThanOrEqual($demand->getDateField(), $end)
+					)
+				);
+
+				$eventsWithEndDate = array(
+					// event inside a month, e.g. 3.3 - 8.3
+					$query->logicalAnd(
+						$query->greaterThanOrEqual('datetime', $begin),
+						$query->lessThanOrEqual('datetime', $end),
+						$query->lessThanOrEqual('eventEnd', $end)
+					),
+					// event expanded from month before to month after
+					$query->logicalAnd(
+						$query->lessThanOrEqual($dateField, $begin),
+						$query->greaterThanOrEqual('eventEnd', $end)
+					),
+					// event from month before to mid of month
+					$query->logicalAnd(
+						$query->lessThanOrEqual($dateField, $begin),
+						$query->greaterThanOrEqual('eventEnd', $begin)
+					),
+					// event from mid month to next month
+					$query->logicalAnd(
+						$query->lessThanOrEqual($dateField, $end),
+						$query->greaterThanOrEqual('eventEnd', $end)
+					)
+				);
+
+				$dateConstraints1 = array(
+					$query->logicalAnd($eventsWithNoEndDate),
+					$query->logicalOr($eventsWithEndDate)
+				);
+
+				$constraints['datetime'] = $query->logicalOr($dateConstraints1);
+
+			}
+
+			$archiveRestriction = $demand->getArchiveRestriction();
+			if (!empty($archiveRestriction)) {
+				$timestamp  = time();
+				$beginningOfDay = strtotime("midnight", $timestamp);
+				$endOfDay = strtotime("tomorrow", $beginningOfDay) - 1;
+				$activeConstraint = $query->logicalOr(
+					// future events
+					$query->greaterThan('datetime', $timestamp),
+
+					// current non-full day events
+					$query->logicalAnd(
+						$query->equals('full_day', 0),
+						$query->lessThan('datetime', $timestamp),
+						$query->greaterThan('event_end', $timestamp)
+					),
+
+					// current full day ending today
+					$query->logicalAnd(
+						$query->equals('full_day', 1),
+						$query->lessThan('datetime', $beginningOfDay),
+						$query->greaterThan('event_end', $beginningOfDay),
+						$query->lessThan('event_end', $endOfDay)
+					),
+
+					// current full day ending in future
+					$query->logicalAnd(
+						$query->equals('full_day', 1),
+						$query->lessThan('datetime', $timestamp),
+						$query->greaterThan('event_end', $endOfDay)
+					),
+
+					// today's full day events without end time
+					$query->logicalAnd(
+						$query->equals('full_day', 1),
+						$query->greaterThanOrEqual('datetime', $beginningOfDay),
+						$query->equals('event_end', 0)
+					)
+				);
+
+				// reset existing archived constraint
+				unset($constraints['archived']);
+
+				if ($demand->getArchiveRestriction() == 'archived') {
+					$constraints['archived'] = $query->logicalNot($activeConstraint);
+				} elseif ($demand->getArchiveRestriction() == 'active') {
+					$constraints['archived'] = $activeConstraint;
+				}
+			}
 
 			$organizers = $demand->getOrganizers();
 			if (!empty($organizers)) {
@@ -106,6 +162,7 @@ class AbstractDemandedRepository {
 			if (!empty($locations)) {
 				$constraints[] = $query->in('location', $locations);
 			}
+
 		}
 	}
 }
