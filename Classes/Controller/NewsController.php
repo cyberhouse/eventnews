@@ -89,6 +89,15 @@ class NewsController extends \GeorgRinger\News\Controller\NewsController {
         $demand->setDay($overwriteDemand['day']);
 
         if (!is_null($search)) {
+            $validCategories = array();
+            foreach ((array)$search->getCategories() as $cat) {
+                if ($cat) {
+                    $validCategories[] = $cat;
+                }
+            }
+            if (!empty($validCategories)) {
+                $demand->setCategories($validCategories);
+            }
             $demand->setLocations($search->getLocations());
             $demand->setOrganizers($search->getOrganizers());
             $demand->setSearchDateFrom($search->getSearchDateFrom());
