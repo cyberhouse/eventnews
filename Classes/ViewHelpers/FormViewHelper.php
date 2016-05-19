@@ -52,35 +52,5 @@ class FormViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\FormViewHelper {
 		return $this->tag->render();
 	}
 
-	/**
-	 * Renders hidden form fields for referrer information about
-	 * the current controller and action.
-	 *
-	 * @return string Hidden fields with referrer information
-	 * @todo filter out referrer information that is equal to the target (e.g. same packageKey)
-	 */
-	protected function renderHiddenReferrerFields() {
-		$request = $this->controllerContext->getRequest();
-		$extensionName = $request->getControllerExtensionName();
-		$vendorName = $request->getControllerVendorName();
-		$controllerName = $request->getControllerName();
-		$actionName = $request->getControllerActionName();
-		$result = chr(10);
-		if ($this->configurationManager->isFeatureEnabled('rewrittenPropertyMapper')) {
-			$result .= '<input type="hidden" name="' . $this->prefixFieldName('__referrer[@extension]') . '" value="' . $extensionName . '" />' . chr(10);
-			if ($vendorName !== NULL) {
-				$result .= '<input type="hidden" name="' . $this->prefixFieldName('__referrer[@vendor]') . '" value="' . $vendorName . '" />' . chr(10);
-			}
-			$result .= '<input type="hidden" name="' . $this->prefixFieldName('__referrer[@controller]') . '" value="' . $controllerName . '" />' . chr(10);
-			$result .= '<input type="hidden" name="' . $this->prefixFieldName('__referrer[@action]') . '" value="' . $actionName . '" />' . chr(10);
-			$result .= '<input type="hidden" name="' . $this->prefixFieldName('__referrer[arguments]') . '" value="' . htmlspecialchars($this->hashService->appendHmac(base64_encode(serialize($request->getArguments())))) . '" />' . chr(10);
-		} else {
-			// @deprecated since Fluid 1.4.0, will be removed two versions after Fluid 6.1.
-			$result .= '<input type="hidden" name="' . $this->prefixFieldName('__referrer[extensionName]') . '" value="' . $extensionName . '" />' . chr(10);
-			$result .= '<input type="hidden" name="' . $this->prefixFieldName('__referrer[controllerName]') . '" value="' . $controllerName . '" />' . chr(10);
-			$result .= '<input type="hidden" name="' . $this->prefixFieldName('__referrer[actionName]') . '" value="' . $actionName . '" />' . chr(10);
-		}
-		return $result;
-	}
 
 }
