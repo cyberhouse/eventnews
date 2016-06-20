@@ -18,7 +18,7 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tceforms.php']['get
 
 // Update flexforms
 $GLOBALS['TYPO3_CONF_VARS']['EXT']['news']['Hooks/BackendUtility.php']['updateFlexforms']['eventnews']
-	= 'GeorgRinger\\Eventnews\\Hooks\\BackendUtility->updateFlexforms';
+	= 'GeorgRinger\\Eventnews\\Hooks\\BackendUtility->update';
 
 $GLOBALS['TYPO3_CONF_VARS']['EXT']['news']['GeorgRinger\\News\\Hooks\\PageLayoutView']['extensionSummary']['eventnews']
 	= 'GeorgRinger\\Eventnews\\Hooks\\PageLayoutView->extensionSummary';

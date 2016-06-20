@@ -33,7 +33,7 @@ class BackendUtility extends \GeorgRinger\News\Hooks\BackendUtility {
 	 * @param array|string $params
 	 * @param array $reference
 	 */
-	public function updateFlexforms(&$params, &$reference) {
+	public function update(&$params, &$reference) {
 		if ($params['selectedView'] === 'News->month') {
 			$removedFields = $this->removedFieldsInListView;
 
