@@ -27,6 +27,15 @@ $GLOBALS['TYPO3_CONF_VARS']['EXT']['news']['GeorgRinger\\News\\Hooks\\PageLayout
 $GLOBALS['TYPO3_CONF_VARS']['EXT']['news']['Domain/Repository/AbstractDemandedRepository.php']['findDemanded']['eventnews']
 	= 'EXT:eventnews/Classes/Hooks/AbstractDemandedRepository.php:GeorgRinger\\Eventnews\\Hooks\\AbstractDemandedRepository->modify';
 
+$GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['formDataGroup']['tcaDatabaseRecord'][\GeorgRinger\Eventnews\Backend\FormDataProvider\EventNewsRowInitializeNew::class] = [
+    'depends' => [
+        \TYPO3\CMS\Backend\Form\FormDataProvider\DatabaseRowInitializeNew::class,
+    ]
+];
+
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass']['eventnews'] =
+    \GeorgRinger\Eventnews\Hooks\Backend\EventNewsDataHandlerHook::class;
+
 
 /***********
  * Extend EXT:news

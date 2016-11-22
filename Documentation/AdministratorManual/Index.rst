@@ -46,3 +46,16 @@ The following TypoScript options are available: ::
 
 	startingpointLocation
 	startingpointOrganizer
+
+
+New news records as event
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+By using the following code block in the Page TsConfig it is possible to hide the checkbox "Is event" and have new news records created as event:
+
+.. code-block:: typoscript
+
+    tx_news.newRecordAsEvent = 1
+    TCEFORM.tx_news_domain_model_news.is_event {
+      disabled = 1
+    }
