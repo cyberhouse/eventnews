@@ -14,18 +14,18 @@ $GLOBALS['TYPO3_CONF_VARS']['EXT']['news']['switchableControllerActions']['newIt
 
 // Hide not needed fields in FormEngine
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tceforms.php']['getSingleFieldClass']['eventnews']
-    = 'GeorgRinger\\Eventnews\\Hooks\\FormEngineHook';
+    = \GeorgRinger\Eventnews\Hooks\FormEngineHook::class;
 
 // Update flexforms
 $GLOBALS['TYPO3_CONF_VARS']['EXT']['news']['Hooks/BackendUtility.php']['updateFlexforms']['eventnews']
-    = 'GeorgRinger\\Eventnews\\Hooks\\BackendUtility->update';
+    = \GeorgRinger\Eventnews\Hooks\BackendUtility::class . '->update';
 
-$GLOBALS['TYPO3_CONF_VARS']['EXT']['news']['GeorgRinger\\News\\Hooks\\PageLayoutView']['extensionSummary']['eventnews']
-    = 'GeorgRinger\\Eventnews\\Hooks\\PageLayoutView->extensionSummary';
+$GLOBALS['TYPO3_CONF_VARS']['EXT']['news'][\GeorgRinger\News\Hooks\PageLayoutView::class]['extensionSummary']['eventnews']
+    = \GeorgRinger\Eventnews\Hooks\PageLayoutView::class . '->extensionSummary';
 
 // Extend the query
 $GLOBALS['TYPO3_CONF_VARS']['EXT']['news']['Domain/Repository/AbstractDemandedRepository.php']['findDemanded']['eventnews']
-    = 'EXT:eventnews/Classes/Hooks/AbstractDemandedRepository.php:GeorgRinger\\Eventnews\\Hooks\\AbstractDemandedRepository->modify';
+    = \GeorgRinger\Eventnews\Hooks\AbstractDemandedRepository::class . '->modify';
 
 $GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['formDataGroup']['tcaDatabaseRecord'][\GeorgRinger\Eventnews\Backend\FormDataProvider\EventNewsRowInitializeNew::class] = [
     'depends' => [
@@ -44,10 +44,10 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['proc
 $GLOBALS['TYPO3_CONF_VARS']['EXT']['news']['classes']['Domain/Model/News'][] = 'eventnews';
 $GLOBALS['TYPO3_CONF_VARS']['EXT']['news']['classes']['Controller/NewsController'][] = 'eventnews';
 
-\TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\SignalSlot\\Dispatcher')->connect(
-    'GeorgRinger\\News\\Domain\\Service\\NewsImportService',
+\TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\SignalSlot\Dispatcher::class)->connect(
+    \GeorgRinger\News\Domain\Service\NewsImportService::class,
     'postHydrate',
-    'GeorgRinger\\Eventnews\\Aspect\\NewsImportAspect',
+    \GeorgRinger\Eventnews\Aspect\NewsImportAspect::class,
     'postHydrate'
 );
 
