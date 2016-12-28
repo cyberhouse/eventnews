@@ -38,6 +38,7 @@ $fields = array(
 		'label' => 'LLL:EXT:eventnews/Resources/Private/Language/locallang_db.xlf:tx_eventnews_domain_model_organizer',
 		'config' => array(
 			'type' => 'select',
+			'renderType' => 'selectSingle',
 			'items' => array(
 				array('', 0),
 			),
@@ -53,6 +54,7 @@ $fields = array(
 		'label' => 'LLL:EXT:eventnews/Resources/Private/Language/locallang_db.xlf:tx_eventnews_domain_model_location',
 		'config' => array(
 			'type' => 'select',
+			'renderType' => 'selectSingle',
 			'items' => array(
 				array('', 0),
 			),
@@ -89,4 +91,4 @@ $GLOBALS['TCA']['tx_news_domain_model_news']['palettes']['palette_event'] = arra
 $GLOBALS['TCA']['tx_news_domain_model_news']['ctrl']['requestUpdate'] .= ',is_event';
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('tx_news_domain_model_news', $fields);
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('tx_news_domain_model_news', 'is_event;;palette_event,', '', 'after:title');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('tx_news_domain_model_news', 'is_event,--palette--;;palette_event,', '', 'after:title');
