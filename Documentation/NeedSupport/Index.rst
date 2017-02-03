@@ -20,7 +20,7 @@ Contribute
 
 Any contribution is highly welcomed! Please use the mentioned issue tracker!
 
-The git repository is located at https://git.typo3.org/TYPO3CMS/Extensions/eventnews.git.
+The git repository is located at https://github.com/georgringer/eventnews
 
 Sponsoring
 ----------
