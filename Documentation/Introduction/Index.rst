@@ -28,7 +28,7 @@ Requirements
 The requirements for this extension are:
 
 - EXT:news 3.1.0+
-- TYPO3 CMS 6.2 LTS or 7.x
+- TYPO3 CMS 7.6 LTS
 
 .. _screenshots:
 
