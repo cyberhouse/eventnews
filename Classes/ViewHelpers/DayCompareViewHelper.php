@@ -8,7 +8,6 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractConditionViewHelper;
 use TYPO3\CMS\Fluid\Core\ViewHelper\Facets\CompilableInterface;
 
 class DayCompareViewHelper extends AbstractConditionViewHelper implements CompilableInterface
-
 {
 
     /**
@@ -36,14 +35,14 @@ class DayCompareViewHelper extends AbstractConditionViewHelper implements Compil
         $currentDay = \DateTime::createFromFormat('d-m-Y H:i:s', sprintf(
             '%s-%s-%s 00:00:01', $demand->getDay(), $demand->getMonth(), $demand->getYear()));
 
-        $found = FALSE;
+        $found = false;
         if ($demand->getDay() > 0) {
             $newsBeginDate = $newsItem->getDatetime()->format('Y-m-d');
             $day = date('Y-m-d', $currentDay->getTimestamp());
 
             if ($newsItem->getEventEnd() == 0) {
                 if ($newsBeginDate === $day) {
-                    $found = TRUE;
+                    $found = true;
                 }
             } else {
                 $newsEndDate = $newsItem->getEventEnd();
@@ -53,13 +52,11 @@ class DayCompareViewHelper extends AbstractConditionViewHelper implements Compil
                 $currentDay->setTime(0, 0);
 
                 if ($newsBeginDate <= $currentDay && $newsEndDate >= $currentDay) {
-                    $found = TRUE;
+                    $found = true;
                 }
             }
         }
 
         return $found;
     }
-
-
 }

@@ -17,7 +17,7 @@ class LocationViewHelper extends AbstractViewHelper
      */
     public function render($locations, $news, $as = 'filteredLocations')
     {
-        $filteredLocations = $availableLocations = array();
+        $filteredLocations = $availableLocations = [];
         foreach ($locations as $locationItem) {
             $availableLocations[$locationItem->getUid()] = 1;
         }

@@ -15,25 +15,26 @@ namespace GeorgRinger\Eventnews\Aspect;
  * The TYPO3 project - inspiring people to share!
  */
 
-class NewsImportAspect {
+class NewsImportAspect
+{
 
-	/**
-	 * @param array $importData
-	 * @param \GeorgRinger\News\Domain\Model\News $news
-	 * @return void
-	 */
-	public function postHydrate(array $importData, $news) {
-		/** @var \GeorgRinger\Eventnews\Domain\Model\News $news */
-		if (is_array($importData['_dynamicData'])) {
-
-			if (isset($importData['_dynamicData']['location'])) {
-				$news->setLocationSimple(trim($importData['_dynamicData']['location']));
-			}
-			if (!empty($importData['_dynamicData']['datetime_end'])) {
-				$date = new \DateTime();
-				$date->setTimestamp($importData['_dynamicData']['datetime_end']);
-				$news->setEventEnd($date);
-			}
-		}
-	}
+    /**
+     * @param array $importData
+     * @param \GeorgRinger\News\Domain\Model\News $news
+     * @return void
+     */
+    public function postHydrate(array $importData, $news)
+    {
+        /** @var \GeorgRinger\Eventnews\Domain\Model\News $news */
+        if (is_array($importData['_dynamicData'])) {
+            if (isset($importData['_dynamicData']['location'])) {
+                $news->setLocationSimple(trim($importData['_dynamicData']['location']));
+            }
+            if (!empty($importData['_dynamicData']['datetime_end'])) {
+                $date = new \DateTime();
+                $date->setTimestamp($importData['_dynamicData']['datetime_end']);
+                $news->setEventEnd($date);
+            }
+        }
+    }
 }

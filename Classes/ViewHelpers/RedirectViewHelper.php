@@ -27,6 +27,4 @@ class RedirectViewHelper extends AbstractViewHelper
             HttpUtility::redirect($url);
         }
     }
-
-
 }

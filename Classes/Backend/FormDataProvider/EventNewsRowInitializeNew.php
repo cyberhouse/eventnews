@@ -15,7 +15,6 @@ namespace GeorgRinger\Eventnews\Backend\FormDataProvider;
  * The TYPO3 project - inspiring people to share!
  */
 
-use GeorgRinger\News\Utility\EmConfiguration;
 use TYPO3\CMS\Backend\Form\FormDataProviderInterface;
 
 /**
