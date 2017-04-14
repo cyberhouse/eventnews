@@ -1,4 +1,5 @@
-{namespace events=GeorgRinger\Eventnews\ViewHelpers}{namespace n=GeorgRinger\News\ViewHelpers}
+{namespace events=GeorgRinger\Eventnews\ViewHelpers}
+{namespace n=GeorgRinger\News\ViewHelpers}
 <f:layout name="General" />
 
 <f:section name="content">
@@ -165,7 +166,7 @@
 </f:section>
 
 <f:section name="calday">
-	<td class="day{f:format.date(date: day.ts, format: 'N')} {f:if(condition: '{day.curmonth}', then: 'curmonth', else: 'othermonth')}{f:if(condition: '{day.news}', then: ' hasevents')}{f:if(condition: '{day.curday}', then: ' today')}">
+	<td class="day{f:format.date(date: day.ts, format: 'N')} {f:if(condition: day.curmonth, then: 'curmonth', else: 'othermonth')}{f:if(condition: day.news, then: ' hasevents')}{f:if(condition: day.curday, then: ' today')}">
 		<f:if condition="{day.dayBelongsToCurrentMonth}">
 			<f:if condition="{day.news}">
 				<f:then>
