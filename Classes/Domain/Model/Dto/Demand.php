@@ -2,10 +2,8 @@
 
 namespace GeorgRinger\Eventnews\Domain\Model\Dto;
 
-
 class Demand extends \GeorgRinger\News\Domain\Model\Dto\NewsDemand
 {
-
     const EVENT_RESTRICTION_ONLY_EVENTS = 1;
     const EVENT_RESTRICTION_NO_EVENTS = 2;
 
@@ -31,7 +29,6 @@ class Demand extends \GeorgRinger\News\Domain\Model\Dto\NewsDemand
     {
         $this->eventRestriction = $settings['eventRestriction'];
     }
-
 
     /**
      * @return array
@@ -137,7 +134,7 @@ class Demand extends \GeorgRinger\News\Domain\Model\Dto\NewsDemand
      */
     public function getNonEmptyArrayValues($array)
     {
-        $out = array();
+        $out = [];
         if (is_array($array)) {
             foreach ($array as $k => $v) {
                 if (!empty($v)) {
@@ -147,6 +144,4 @@ class Demand extends \GeorgRinger\News\Domain\Model\Dto\NewsDemand
         }
         return $out;
     }
-
-
 }

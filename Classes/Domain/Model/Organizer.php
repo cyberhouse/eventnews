@@ -1,7 +1,6 @@
 <?php
 namespace GeorgRinger\Eventnews\Domain\Model;
 
-
 /***************************************************************
  *
  *  Copyright notice
@@ -30,79 +29,85 @@ namespace GeorgRinger\Eventnews\Domain\Model;
 /**
  * Organizer
  */
-class Organizer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
+class Organizer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+{
 
-	/**
-	 * title
-	 *
-	 * @var string
-	 */
-	protected $title = '';
+    /**
+     * title
+     *
+     * @var string
+     */
+    protected $title = '';
 
-	/**
-	 * description
-	 *
-	 * @var string
-	 */
-	protected $description = '';
+    /**
+     * description
+     *
+     * @var string
+     */
+    protected $description = '';
 
-	/**
-	 * link
-	 *
-	 * @var string
-	 */
-	protected $link = '';
+    /**
+     * link
+     *
+     * @var string
+     */
+    protected $link = '';
 
-	/**
-	 * Returns the title
-	 *
-	 * @return string $title
-	 */
-	public function getTitle() {
-		return $this->title;
-	}
+    /**
+     * Returns the title
+     *
+     * @return string $title
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
 
-	/**
-	 * Sets the title
-	 *
-	 * @param string $title
-	 * @return void
-	 */
-	public function setTitle($title) {
-		$this->title = $title;
-	}
+    /**
+     * Sets the title
+     *
+     * @param string $title
+     * @return void
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
 
-	/**
-	 * Returns the description
-	 *
-	 * @return string $description
-	 */
-	public function getDescription() {
-		return $this->description;
-	}
+    /**
+     * Returns the description
+     *
+     * @return string $description
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
 
-	/**
-	 * Sets the description
-	 *
-	 * @param string $description
-	 * @return void
-	 */
-	public function setDescription($description) {
-		$this->description = $description;
-	}
+    /**
+     * Sets the description
+     *
+     * @param string $description
+     * @return void
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
 
-	/**
-	 * @return string
-	 */
-	public function getLink() {
-		return $this->link;
-	}
+    /**
+     * @return string
+     */
+    public function getLink()
+    {
+        return $this->link;
+    }
 
-	/**
-	 * @param string $link
-	 */
-	public function setLink($link) {
-		$this->link = $link;
-	}
-
+    /**
+     * @param string $link
+     */
+    public function setLink($link)
+    {
+        $this->link = $link;
+    }
 }

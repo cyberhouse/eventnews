@@ -1,12 +1,11 @@
 <?php
 if (!defined('TYPO3_MODE')) {
-    die ('Access denied.');
+    die('Access denied.');
 }
 
 // Add new controller/action
 $GLOBALS['TYPO3_CONF_VARS']['EXT']['news']['switchableControllerActions']['newItems']['News->month']
     = 'Month view';
-
 
 /***********
  * Hooks
@@ -35,7 +34,6 @@ $GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['formDataGroup']['tcaDatabaseRe
 
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass']['eventnews'] =
     \GeorgRinger\Eventnews\Hooks\Backend\EventNewsDataHandlerHook::class;
-
 
 /***********
  * Extend EXT:news

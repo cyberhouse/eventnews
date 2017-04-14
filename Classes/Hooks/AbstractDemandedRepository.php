@@ -37,7 +37,6 @@ class AbstractDemandedRepository
             $params['constraints']);
     }
 
-
     /**
      * Update the main event constraints
      *
@@ -52,8 +51,7 @@ class AbstractDemandedRepository
         $respectEnableFields,
         \TYPO3\CMS\Extbase\Persistence\QueryInterface $query,
         array &$constraints
-    )
-    {
+    ) {
         $eventRestriction = $demand->getEventRestriction();
 
         /** @var QueryInterface $query */
@@ -112,14 +110,14 @@ class AbstractDemandedRepository
      */
     protected function getDateConstraint(\TYPO3\CMS\Extbase\Persistence\QueryInterface $query, $dateField, $begin, $end)
     {
-        $eventsWithNoEndDate = array(
+        $eventsWithNoEndDate = [
             $query->logicalAnd(
                 $query->greaterThanOrEqual($dateField, $begin),
                 $query->lessThanOrEqual($dateField, $end)
             )
-        );
+        ];
 
-        $eventsWithEndDate = array(
+        $eventsWithEndDate = [
             // event inside a month, e.g. 3.3 - 8.3
             $query->logicalAnd(
                 $query->greaterThanOrEqual('datetime', $begin),
@@ -141,12 +139,12 @@ class AbstractDemandedRepository
                 $query->lessThanOrEqual($dateField, $end),
                 $query->greaterThanOrEqual('eventEnd', $end)
             )
-        );
+        ];
 
-        $dateConstraints = array(
+        $dateConstraints = [
             $query->logicalAnd($eventsWithNoEndDate),
             $query->logicalOr($eventsWithEndDate)
-        );
+        ];
         return $dateConstraints;
     }
 }

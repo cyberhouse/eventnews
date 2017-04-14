@@ -17,7 +17,7 @@ class OrganizerViewHelper extends AbstractViewHelper
      */
     public function render($organizers, $news, $as = 'filteredOrganizers')
     {
-        $filteredOrganizers = $availableOrganizers = array();
+        $filteredOrganizers = $availableOrganizers = [];
         foreach ($organizers as $organizerItem) {
             $availableOrganizers[$organizerItem->getUid()] = 1;
         }

@@ -18,7 +18,8 @@ namespace GeorgRinger\Eventnews\Controller;
 /**
  * Class GeorgRinger\Eventnews\Controller\NewsController
  */
-class NewsController extends \GeorgRinger\News\Controller\NewsController {
+class NewsController extends \GeorgRinger\News\Controller\NewsController
+{
 
     /**
      * Month view
@@ -47,7 +48,7 @@ class NewsController extends \GeorgRinger\News\Controller\NewsController {
         $organizerPidList = $this->settings['startingpointOrganizer'] ? $this->settings['startingpointOrganizer'] : $this->settings['startingpoint'];
         $locationPidList = $this->settings['startingpointLocation'] ? $this->settings['startingpointLocation'] : $this->settings['startingpoint'];
 
-        $assignedValues = array(
+        $assignedValues = [
             'search' => $search,
             'news' => $newsRecords,
             'overwriteDemand' => $overwriteDemand,
@@ -55,11 +56,11 @@ class NewsController extends \GeorgRinger\News\Controller\NewsController {
             'currentPageId' => $GLOBALS['TSFE']->id,
             'allOrganizers' => $organizerRepository->findByStartingPoint($organizerPidList),
             'allLocations' => $locationRepository->findByStartingPoint($locationPidList),
-            'allCategories' => empty($categories) ? array() : $categoryRepository->findByIdList($categories),
+            'allCategories' => empty($categories) ? [] : $categoryRepository->findByIdList($categories),
             'previousMonthData' => $this->getDateConfig($demand, '-1 month'),
             'nextMonthData' => $this->getDateConfig($demand, '+1 month'),
             'currentMonthData' => $this->getDateConfig($demand),
-        );
+        ];
 
         $this->view->assignMultiple($assignedValues);
     }
@@ -89,7 +90,7 @@ class NewsController extends \GeorgRinger\News\Controller\NewsController {
         $demand->setDay($overwriteDemand['day']);
 
         if (!is_null($search)) {
-            $validCategories = array();
+            $validCategories = [];
             foreach ((array)$search->getCategories() as $cat) {
                 if ($cat) {
                     $validCategories[] = $cat;
@@ -106,7 +107,6 @@ class NewsController extends \GeorgRinger\News\Controller\NewsController {
         return $demand;
     }
 
-
     /**
      * Get a date configuration of the given time offset
      *
@@ -120,11 +120,10 @@ class NewsController extends \GeorgRinger\News\Controller\NewsController {
         if (!empty($timeString)) {
             $date->modify($timeString);
         }
-        return array(
+        return [
             'date' => $date,
             'month' => $date->format('n'),
             'year' => $date->format('Y')
-        );
+        ];
     }
-
 }
