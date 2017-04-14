@@ -8,6 +8,11 @@ class CalendarViewHelper extends AbstractViewHelper
 {
 
     /**
+     * @var bool
+     */
+    protected $escapeOutput = false;
+
+    /**
      * @param mixed $newsList
      * @param \GeorgRinger\Eventnews\Domain\Model\Dto\Demand $demand
      * @param int $firstDayOfWeek 0 for Sunday, 1 for Monday

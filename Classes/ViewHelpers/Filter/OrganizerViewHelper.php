@@ -9,6 +9,11 @@ class OrganizerViewHelper extends AbstractViewHelper
 {
 
     /**
+     * @var bool
+     */
+    protected $escapeOutput = false;
+
+    /**
      * @param object $organizers
      * @param object $news
      * @param string $as

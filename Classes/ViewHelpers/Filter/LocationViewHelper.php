@@ -9,6 +9,11 @@ class LocationViewHelper extends AbstractViewHelper
 {
 
     /**
+     * @var bool
+     */
+    protected $escapeOutput = false;
+
+    /**
      * @param object $locations
      * @param object $news
      * @param string $as

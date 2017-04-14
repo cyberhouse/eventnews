@@ -3,7 +3,7 @@
 namespace GeorgRinger\Eventnews\ViewHelpers;
 
 use GeorgRinger\Eventnews\Domain\Model\Dto\Demand;
-use GeorgRinger\News\Domain\Model\News;
+use GeorgRinger\Eventnews\Domain\Model\News;
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractConditionViewHelper;
 use TYPO3\CMS\Fluid\Core\ViewHelper\Facets\CompilableInterface;
 
