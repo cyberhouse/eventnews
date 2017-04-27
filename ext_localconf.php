@@ -16,8 +16,13 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tceforms.php']['get
     = \GeorgRinger\Eventnews\Hooks\FormEngineHook::class;
 
 // Update flexforms
-$GLOBALS['TYPO3_CONF_VARS']['EXT']['news']['Hooks/BackendUtility.php']['updateFlexforms']['eventnews']
-    = \GeorgRinger\Eventnews\Hooks\BackendUtility::class . '->update';
+// For 7x
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_befunc.php']['getFlexFormDSClass'][]
+    = \GeorgRinger\Eventnews\Hooks\FlexFormHook::class;
+// For 8x
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS'][\TYPO3\CMS\Core\Configuration\FlexForm\FlexFormTools::class]['flexParsing'][]
+    = \GeorgRinger\Eventnews\Hooks\FlexFormHook::class;
+
 
 $GLOBALS['TYPO3_CONF_VARS']['EXT']['news'][\GeorgRinger\News\Hooks\PageLayoutView::class]['extensionSummary']['eventnews']
     = \GeorgRinger\Eventnews\Hooks\PageLayoutView::class . '->extensionSummary';
