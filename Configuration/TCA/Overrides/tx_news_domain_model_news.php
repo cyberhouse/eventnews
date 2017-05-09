@@ -5,7 +5,7 @@ if (!defined('TYPO3_MODE')) {
 
 $fields = [
     'is_event' => [
-        'exclude' => 1,
+        'exclude' => true,
         'label' => 'LLL:EXT:eventnews/Resources/Private/Language/locallang_db.xlf:tx_eventnews_domain_model_news.is_event',
         'config' => [
             'type' => 'check',
@@ -13,7 +13,7 @@ $fields = [
         ]
     ],
     'full_day' => [
-        'exclude' => 1,
+        'exclude' => true,
         'displayCond' => 'FIELD:is_event:>:0',
         'label' => 'LLL:EXT:eventnews/Resources/Private/Language/locallang_db.xlf:tx_eventnews_domain_model_news.full_day',
         'config' => [
@@ -22,7 +22,7 @@ $fields = [
         ]
     ],
     'event_end' => [
-        'exclude' => 1,
+        'exclude' => true,
         'displayCond' => 'FIELD:is_event:>:0',
         'label' => 'LLL:EXT:eventnews/Resources/Private/Language/locallang_db.xlf:tx_eventnews_domain_model_news.event_end',
         'config' => [
@@ -33,7 +33,7 @@ $fields = [
         ],
     ],
     'organizer' => [
-        'exclude' => 1,
+        'exclude' => true,
         'displayCond' => 'FIELD:is_event:>:0',
         'label' => 'LLL:EXT:eventnews/Resources/Private/Language/locallang_db.xlf:tx_eventnews_domain_model_organizer',
         'config' => [
@@ -49,7 +49,7 @@ $fields = [
         ],
     ],
     'location' => [
-        'exclude' => 1,
+        'exclude' => true,
         'displayCond' => 'FIELD:is_event:>:0',
         'label' => 'LLL:EXT:eventnews/Resources/Private/Language/locallang_db.xlf:tx_eventnews_domain_model_location',
         'config' => [
@@ -65,7 +65,7 @@ $fields = [
         ],
     ],
     'organizer_simple' => [
-        'exclude' => 1,
+        'exclude' => true,
         'displayCond' => 'FIELD:is_event:>:0',
         'label' => 'LLL:EXT:eventnews/Resources/Private/Language/locallang_db.xlf:tx_news_domain_model_news.organizer_simple',
         'config' => [
@@ -74,7 +74,7 @@ $fields = [
         ],
     ],
     'location_simple' => [
-        'exclude' => 1,
+        'exclude' => true,
         'displayCond' => 'FIELD:is_event:>:0',
         'label' => 'LLL:EXT:eventnews/Resources/Private/Language/locallang_db.xlf:tx_news_domain_model_news.location_simple',
         'config' => [
