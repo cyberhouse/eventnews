@@ -9,12 +9,12 @@ class FlexFormHook
     /**
      * Hook for 7x
      *
-     * @param array $dataStructArray
+     * @param array $dataStructure
      * @param array $conf
      * @param array $row
      * @param string $table
      */
-    public function getFlexFormDS_postProcessDS(&$dataStructArray, $conf, $row, $table)
+    public function getFlexFormDS_postProcessDS(&$dataStructure, $conf, $row, $table)
     {
         if ($table === 'tt_content' && $row['CType'] === 'list' && $row['list_type'] === 'news_pi1') {
             $file = PATH_site . 'typo3conf/ext/eventnews/Configuration/Flexforms/flexform_eventnews.xml';
