@@ -98,6 +98,14 @@ class AbstractDemandedRepository
                 $converted += 86350;
                 $constraints[] = $query->lessThanOrEqual('datetime', $converted);
             }
+            // Time restriction to include events with startdate in the past AND enddate in the future!
+            if ($demand->getTimeRestriction()) {
+                $timeLimit = \GeorgRinger\News\Utility\ConstraintHelper::getTimeRestrictionLow($demand->getTimeRestriction());
+                $constraints['timeRestrictionGreater'] = $query->greaterThanOrEqual(
+                    'eventEnd',
+                    $timeLimit
+                );
+            }
         }
     }
 
