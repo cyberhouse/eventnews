@@ -20,24 +20,25 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 /**
  * Class FormEngineHook
  */
-class FormEngineHook {
+class FormEngineHook
+{
+    const FIELDS = 'full_day,event_end,organizer,organizer_simple,location,location_simple';
 
-	const FIELDS = 'full_day,event_end,organizer,organizer_simple,location,location_simple';
-
-	/**
-	 * Remove rendered field from output if it is no event
-	 *
-	 * @param string $table
-	 * @param string $field
-	 * @param array $row
-	 * @param string $out
-	 * @return void
-	 */
-	public function getSingleField_postProcess($table, $field, $row, &$out) {
-		if ($table === 'tx_news_domain_model_news' && $row['is_event'] == 0) {
-			if (GeneralUtility::inList(self::FIELDS, $field)) {
-				$out = '';
-			}
-		}
-	}
+    /**
+     * Remove rendered field from output if it is no event
+     *
+     * @param string $table
+     * @param string $field
+     * @param array $row
+     * @param string $out
+     * @return void
+     */
+    public function getSingleField_postProcess($table, $field, $row, &$out)
+    {
+        if ($table === 'tx_news_domain_model_news' && $row['is_event'] == 0) {
+            if (GeneralUtility::inList(self::FIELDS, $field)) {
+                $out = '';
+            }
+        }
+    }
 }

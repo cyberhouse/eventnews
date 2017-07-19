@@ -1,7 +1,6 @@
 <?php
 namespace GeorgRinger\Eventnews\Domain\Model;
 
-
 /***************************************************************
  *
  *  Copyright notice
@@ -30,136 +29,146 @@ namespace GeorgRinger\Eventnews\Domain\Model;
 /**
  * Location
  */
-class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
+class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+{
 
-	/**
-	 * title
-	 *
-	 * @var string
-	 */
-	protected $title = '';
+    /**
+     * title
+     *
+     * @var string
+     */
+    protected $title = '';
 
-	/**
-	 * description
-	 *
-	 * @var string
-	 */
-	protected $description = '';
+    /**
+     * description
+     *
+     * @var string
+     */
+    protected $description = '';
 
-	/**
-	 * lat
-	 *
-	 * @var float
-	 */
-	protected $lat = 0.0;
+    /**
+     * lat
+     *
+     * @var float
+     */
+    protected $lat = 0.0;
 
-	/**
-	 * lng
-	 *
-	 * @var float
-	 */
-	protected $lng = 0.0;
+    /**
+     * lng
+     *
+     * @var float
+     */
+    protected $lng = 0.0;
 
-	/**
-	 * link
-	 *
-	 * @var string
-	 */
-	protected $link = '';
+    /**
+     * link
+     *
+     * @var string
+     */
+    protected $link = '';
 
-	/**
-	 * Returns the title
-	 *
-	 * @return string $title
-	 */
-	public function getTitle() {
-		return $this->title;
-	}
+    /**
+     * Returns the title
+     *
+     * @return string $title
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
 
-	/**
-	 * Sets the title
-	 *
-	 * @param string $title
-	 * @return void
-	 */
-	public function setTitle($title) {
-		$this->title = $title;
-	}
+    /**
+     * Sets the title
+     *
+     * @param string $title
+     * @return void
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
 
-	/**
-	 * Returns the description
-	 *
-	 * @return string $description
-	 */
-	public function getDescription() {
-		return $this->description;
-	}
+    /**
+     * Returns the description
+     *
+     * @return string $description
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
 
-	/**
-	 * Sets the description
-	 *
-	 * @param string $description
-	 * @return void
-	 */
-	public function setDescription($description) {
-		$this->description = $description;
-	}
+    /**
+     * Sets the description
+     *
+     * @param string $description
+     * @return void
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
 
-	/**
-	 * Returns the lat
-	 *
-	 * @return float $lat
-	 */
-	public function getLat() {
-		return $this->lat;
-	}
+    /**
+     * Returns the lat
+     *
+     * @return float $lat
+     */
+    public function getLat()
+    {
+        return $this->lat;
+    }
 
-	/**
-	 * Sets the lat
-	 *
-	 * @param float $lat
-	 * @return void
-	 */
-	public function setLat($lat) {
-		$this->lat = $lat;
-	}
+    /**
+     * Sets the lat
+     *
+     * @param float $lat
+     * @return void
+     */
+    public function setLat($lat)
+    {
+        $this->lat = $lat;
+    }
 
-	/**
-	 * Returns the lng
-	 *
-	 * @return float $lng
-	 */
-	public function getLng() {
-		return $this->lng;
-	}
+    /**
+     * Returns the lng
+     *
+     * @return float $lng
+     */
+    public function getLng()
+    {
+        return $this->lng;
+    }
 
-	/**
-	 * Sets the lng
-	 *
-	 * @param float $lng
-	 * @return void
-	 */
-	public function setLng($lng) {
-		$this->lng = $lng;
-	}
+    /**
+     * Sets the lng
+     *
+     * @param float $lng
+     * @return void
+     */
+    public function setLng($lng)
+    {
+        $this->lng = $lng;
+    }
 
-	/**
-	 * Returns the link
-	 *
-	 * @return string $link
-	 */
-	public function getLink() {
-		return $this->link;
-	}
+    /**
+     * Returns the link
+     *
+     * @return string $link
+     */
+    public function getLink()
+    {
+        return $this->link;
+    }
 
-	/**
-	 * Sets the link
-	 *
-	 * @param string $link
-	 * @return void
-	 */
-	public function setLink($link) {
-		$this->link = $link;
-	}
-
+    /**
+     * Sets the link
+     *
+     * @param string $link
+     * @return void
+     */
+    public function setLink($link)
+    {
+        $this->link = $link;
+    }
 }

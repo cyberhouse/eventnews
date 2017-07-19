@@ -13,6 +13,48 @@
 				<source>Only non events</source>
 			</trans-unit>
 
+			<trans-unit id="filter">
+				<source>Filter</source>
+			</trans-unit>
+			<trans-unit id="filter_submit">
+				<source>Submit</source>
+			</trans-unit>
+			<trans-unit id="organizer">
+				<source>Organizer</source>
+			</trans-unit>
+			<trans-unit id="organizers">
+				<source>Organizers</source>
+			</trans-unit>
+			<trans-unit id="location">
+				<source>Location</source>
+			</trans-unit>
+			<trans-unit id="locations">
+				<source>Locations</source>
+			</trans-unit>
+			<trans-unit id="category">
+				<source>Category</source>
+			</trans-unit>
+			<trans-unit id="categories">
+				<source>Categories</source>
+			</trans-unit>
+			<trans-unit id="calendar">
+				<source>Calendar</source>
+			</trans-unit>
+			<trans-unit id="list">
+				<source>List</source>
+			</trans-unit>
+			<trans-unit id="event_start">
+				<source>Event start</source>
+			</trans-unit>
+			<trans-unit id="event_end">
+				<source>Event end</source>
+			</trans-unit>
+			<trans-unit id="searchDateFrom">
+				<source>Startdatum</source>
+			</trans-unit>
+			<trans-unit id="searchDateTo">
+				<source>Enddatum</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
