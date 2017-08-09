@@ -34,13 +34,16 @@ class NewsController extends \GeorgRinger\News\Controller\NewsController
     public function monthAction(
         \GeorgRinger\Eventnews\Domain\Model\Dto\SearchDemand $search = null,
         array $overwriteDemand = null
-    ) {
+    )
+    {
         $demand = $this->getDemand($search, $overwriteDemand);
         $newsRecords = $this->newsRepository->findDemanded($demand);
         $categories = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',', $this->settings['categories'], true);
 
         /** @var \GeorgRinger\News\Domain\Repository\CategoryRepository $categoryRepository */
         $categoryRepository = $this->objectManager->get(\GeorgRinger\News\Domain\Repository\CategoryRepository::class);
+        /** @var \GeorgRinger\News\Domain\Repository\TagRepository $tagRepository */
+        $tagRepository = $this->objectManager->get(\GeorgRinger\News\Domain\Repository\TagRepository::class);
         /** @var \GeorgRinger\Eventnews\Domain\Repository\LocationRepository $locationRepository */
         $locationRepository = $this->objectManager->get(\GeorgRinger\Eventnews\Domain\Repository\LocationRepository::class);
         /** @var \GeorgRinger\Eventnews\Domain\Repository\OrganizerRepository $organizerRepository */
@@ -58,6 +61,7 @@ class NewsController extends \GeorgRinger\News\Controller\NewsController
             'allOrganizers' => $organizerRepository->findByStartingPoint($organizerPidList),
             'allLocations' => $locationRepository->findByStartingPoint($locationPidList),
             'allCategories' => empty($categories) ? [] : $categoryRepository->findByIdList($categories),
+            'allTags' => empty($this->settings['tags']) ? [] : $tagRepository->findByIdList(explode(',', $this->settings['tags'])),
             'previousMonthData' => $this->getDateConfig($demand, '-1 month'),
             'nextMonthData' => $this->getDateConfig($demand, '+1 month'),
             'currentMonthData' => $this->getDateConfig($demand),
@@ -75,7 +79,8 @@ class NewsController extends \GeorgRinger\News\Controller\NewsController
     protected function getDemand(
         \GeorgRinger\Eventnews\Domain\Model\Dto\SearchDemand $search = null,
         array $overwriteDemand = null
-    ) {
+    )
+    {
         /** @var \GeorgRinger\Eventnews\Domain\Model\Dto\Demand $demand */
         $demand = $this->createDemandObjectFromSettings($this->settings,
             'GeorgRinger\\Eventnews\\Domain\\Model\\Dto\\Demand');
@@ -105,6 +110,7 @@ class NewsController extends \GeorgRinger\News\Controller\NewsController
             $demand->setOrganizers($search->getOrganizers());
             $demand->setSearchDateFrom($search->getSearchDateFrom());
             $demand->setSearchDateTo($search->getSearchDateTo());
+            $demand->setTags(implode(',', $search->getTags()));
         }
         return $demand;
     }

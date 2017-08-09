@@ -51,6 +51,18 @@
 						</li>
 					</f:for>
 				</ul>
+                <h4>
+                    <f:translate key="tags"/>
+                </h4>
+                <ul style="list-style: none">
+                    <f:for each="{allTags}" as="tag">
+                        <li>
+                            <label>
+                                <f:form.checkbox property="tags.{tag.uid}" value="{tag.uid}" />
+                                {tag.title} </label>
+                        </li>
+                    </f:for>
+                </ul>
 
 				<div class="form-group">
 					<label for="searchDateFrom">
