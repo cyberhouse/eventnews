@@ -20,6 +20,7 @@ namespace GeorgRinger\Eventnews\Controller;
  */
 class NewsController extends \GeorgRinger\News\Controller\NewsController
 {
+    const SIGNAL_NEWS_MONTH_ACTION = 'monthAction';
 
     /**
      * Month view
@@ -62,6 +63,7 @@ class NewsController extends \GeorgRinger\News\Controller\NewsController
             'currentMonthData' => $this->getDateConfig($demand),
         ];
 
+        $assignedValues = $this->emitActionSignal('NewsController', self::SIGNAL_NEWS_MONTH_ACTION, $assignedValues);
         $this->view->assignMultiple($assignedValues);
     }
 
