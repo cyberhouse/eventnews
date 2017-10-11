@@ -27,6 +27,9 @@ class SearchDemand
     /** @var array */
     protected $categories;
 
+    /** @var array */
+    protected $tags;
+
     /** @var string */
     protected $searchDateFrom;
 
@@ -79,6 +82,22 @@ class SearchDemand
     public function setCategories($categories)
     {
         $this->categories = $categories;
+    }
+
+    /**
+     * @return array
+     */
+    public function getTags()
+    {
+        return $this->tags;
+    }
+
+    /**
+     * @param array $tags
+     */
+    public function setTags($tags)
+    {
+        $this->tags = $tags;
     }
 
     /**
