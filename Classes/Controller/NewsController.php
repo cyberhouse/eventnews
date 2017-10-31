@@ -34,8 +34,7 @@ class NewsController extends \GeorgRinger\News\Controller\NewsController
     public function monthAction(
         \GeorgRinger\Eventnews\Domain\Model\Dto\SearchDemand $search = null,
         array $overwriteDemand = null
-    )
-    {
+    ) {
         $demand = $this->getDemand($search, $overwriteDemand);
         $newsRecords = $this->newsRepository->findDemanded($demand);
         $categories = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',', $this->settings['categories'], true);
@@ -85,8 +84,7 @@ class NewsController extends \GeorgRinger\News\Controller\NewsController
     protected function getDemand(
         \GeorgRinger\Eventnews\Domain\Model\Dto\SearchDemand $search = null,
         array $overwriteDemand = null
-    )
-    {
+    ) {
         /** @var \GeorgRinger\Eventnews\Domain\Model\Dto\Demand $demand */
         $demand = $this->createDemandObjectFromSettings($this->settings,
             'GeorgRinger\\Eventnews\\Domain\\Model\\Dto\\Demand');
