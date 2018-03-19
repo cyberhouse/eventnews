@@ -6,6 +6,9 @@
 			<trans-unit id="flexforms_general.eventRestriction">
 				<source>Event Restriction</source>
 			</trans-unit>
+			<trans-unit id="flexforms_general.fallback">
+				<source>Defined in TypoScript</source>
+			</trans-unit>
 			<trans-unit id="flexforms_general.eventRestriction.1">
 				<source>Only events</source>
 			</trans-unit>
