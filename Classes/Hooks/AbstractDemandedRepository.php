@@ -33,8 +33,12 @@ class AbstractDemandedRepository
             return;
         }
 
-        $this->updateEventConstraints($params['demand'], $params['respectEnableFields'], $params['query'],
-            $params['constraints']);
+        $this->updateEventConstraints(
+            $params['demand'],
+            $params['respectEnableFields'],
+            $params['query'],
+            $params['constraints']
+        );
     }
 
     /**
@@ -62,14 +66,20 @@ class AbstractDemandedRepository
             unset($constraints['datetime']);
             $constraints[] = $query->equals('isEvent', 1);
 
-            if ($demand->getMonth() && $demand->getYear()) {
+            if ($demand->getYear()) {
                 $dateField = $demand->getDateField();
-                if ($demand->getDay()) {
-                    $begin = mktime(0, 0, 0, $demand->getMonth(), $demand->getDay(), $demand->getYear());
-                    $end = mktime(23, 59, 59, $demand->getMonth(), $demand->getDay(), $demand->getYear());
+
+                if ($demand->getMonth() > 0) {
+                    if ($demand->getDay() > 0) {
+                        $begin = mktime(0, 0, 0, $demand->getMonth(), $demand->getDay(), $demand->getYear());
+                        $end = mktime(23, 59, 59, $demand->getMonth(), $demand->getDay(), $demand->getYear());
+                    } else {
+                        $begin = mktime(0, 0, 0, $demand->getMonth(), 1, $demand->getYear());
+                        $end = mktime(23, 59, 59, ($demand->getMonth() + 1), 0, $demand->getYear());
+                    }
                 } else {
-                    $begin = mktime(0, 0, 0, $demand->getMonth(), 1, $demand->getYear());
-                    $end = mktime(23, 59, 59, ($demand->getMonth() + 1), 0, $demand->getYear());
+                    $begin = mktime(0, 0, 0, 1, 1, $demand->getYear());
+                    $end = mktime(23, 59, 59, 12, 31, $demand->getYear());
                 }
 
                 $dateConstraints = $this->getDateConstraint($query, $dateField, $begin, $end);
