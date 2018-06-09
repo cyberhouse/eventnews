@@ -110,7 +110,7 @@ class NewsController extends \GeorgRinger\News\Controller\NewsController
             $demand->setOrganizers($search->getOrganizers());
             $demand->setSearchDateFrom($search->getSearchDateFrom());
             $demand->setSearchDateTo($search->getSearchDateTo());
-            $demand->setTags(implode(',', $search->getTags()));
+            $demand->setTags(implode(',', (array)$search->getTags()));
         }
         return $demand;
     }
