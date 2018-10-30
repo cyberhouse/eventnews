@@ -45,9 +45,9 @@ class DayCompareViewHelper extends AbstractConditionViewHelper implements Compil
                     $found = true;
                 }
             } else {
-                $newsEndDate = $newsItem->getEventEnd();
+                $newsEndDate = clone $newsItem->getEventEnd();
                 $newsEndDate->setTime(23, 59, 59);
-                $newsBeginDate = $newsItem->getDatetime();
+                $newsBeginDate = clone $newsItem->getDatetime();
                 $newsBeginDate->setTime(0, 0);
                 $currentDay->setTime(0, 0);
 
