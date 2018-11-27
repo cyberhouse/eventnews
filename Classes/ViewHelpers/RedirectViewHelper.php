@@ -17,14 +17,21 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
  */
 class RedirectViewHelper extends AbstractViewHelper
 {
+    /**
+     * register arguments
+     */
+    public function initializeArguments()
+    {
+        $this->registerArgument('url', 'string', '', true);
+    }
 
     /**
-     * @param string $url
+     * render
      */
-    public function render($url)
+    public function render()
     {
-        if ($url) {
-            HttpUtility::redirect($url);
+        if ($this->arguments['url']) {
+            HttpUtility::redirect($this->arguments['url']);
         }
     }
 }
