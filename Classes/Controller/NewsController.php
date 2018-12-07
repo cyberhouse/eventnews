@@ -28,7 +28,6 @@ class NewsController extends \GeorgRinger\News\Controller\NewsController
      * @param \GeorgRinger\Eventnews\Domain\Model\Dto\SearchDemand $search
      * @param array $overwriteDemand
      * @ignorevalidation $search
-     * @dontverifyrequesthash
      * @return void
      */
     public function monthAction(
