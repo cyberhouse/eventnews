@@ -111,9 +111,9 @@ class AbstractDemandedRepository
             // Time restriction to include events with startdate in the past AND enddate in the future!
             if ($demand->getTimeRestriction()) {
                 $timeLimit = \GeorgRinger\News\Utility\ConstraintHelper::getTimeRestrictionLow($demand->getTimeRestriction());
-                $constraints['timeRestrictionGreater'] = $query->greaterThanOrEqual(
-                    'eventEnd',
-                    $timeLimit
+                $constraints['timeRestrictionGreater'] = $query->logicalOr(
+                    $query->greaterThanOrEqual('eventEnd', $timeLimit),
+                    $query->greaterThanOrEqual('datetime', $timeLimit)
                 );
             }
         }
