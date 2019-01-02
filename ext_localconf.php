@@ -16,10 +16,6 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tceforms.php']['get
     = \GeorgRinger\Eventnews\Hooks\FormEngineHook::class;
 
 // Update flexforms
-// For 7x
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_befunc.php']['getFlexFormDSClass'][]
-    = \GeorgRinger\Eventnews\Hooks\FlexFormHook::class;
-// For 8x
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS'][\TYPO3\CMS\Core\Configuration\FlexForm\FlexFormTools::class]['flexParsing'][]
     = \GeorgRinger\Eventnews\Hooks\FlexFormHook::class;
 
@@ -53,7 +49,7 @@ $GLOBALS['TYPO3_CONF_VARS']['EXT']['news']['classes']['Controller/NewsController
     'postHydrate'
 );
 
-$emConfiguration = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['eventnews']);
+$emConfiguration = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['eventnews'], ['allowed_classes' => false]);
 // override language files of news
 if (is_array($emConfiguration) && (bool)$emConfiguration['overrideAdministrationModuleLabel']) {
     $GLOBALS['TYPO3_CONF_VARS']['SYS']['locallangXMLOverride']['default']['EXT:news/Resources/Private/Language/locallang_modadministration.xlf'][] = 'EXT:eventnews/Resources/Private/Language/Overrides/locallang_modadministration.xlf';
