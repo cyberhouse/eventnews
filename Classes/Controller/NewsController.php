@@ -33,14 +33,19 @@ class NewsController extends \GeorgRinger\News\Controller\NewsController
     public function monthAction(
         \GeorgRinger\Eventnews\Domain\Model\Dto\SearchDemand $search = null,
         array $overwriteDemand = null
-    )
-    {
+    ) {
         $demand = $this->getDemand($search, $overwriteDemand);
         $newsRecords = $this->newsRepository->findDemanded($demand);
         $categories = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',', $this->settings['categories'], true);
 
         /** @var \GeorgRinger\News\Domain\Repository\CategoryRepository $categoryRepository */
         $categoryRepository = $this->objectManager->get(\GeorgRinger\News\Domain\Repository\CategoryRepository::class);
+        $categoryRepository->setDefaultOrderings(
+            [
+                'title' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING
+            ]
+        );
+
         /** @var \GeorgRinger\News\Domain\Repository\TagRepository $tagRepository */
         $tagRepository = $this->objectManager->get(\GeorgRinger\News\Domain\Repository\TagRepository::class);
         /** @var \GeorgRinger\Eventnews\Domain\Repository\LocationRepository $locationRepository */
@@ -78,8 +83,7 @@ class NewsController extends \GeorgRinger\News\Controller\NewsController
     protected function getDemand(
         \GeorgRinger\Eventnews\Domain\Model\Dto\SearchDemand $search = null,
         array $overwriteDemand = null
-    )
-    {
+    ) {
         /** @var \GeorgRinger\Eventnews\Domain\Model\Dto\Demand $demand */
         $demand = $this->createDemandObjectFromSettings($this->settings,
             'GeorgRinger\\Eventnews\\Domain\\Model\\Dto\\Demand');
