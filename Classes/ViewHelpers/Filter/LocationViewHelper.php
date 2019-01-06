@@ -3,7 +3,7 @@
 namespace GeorgRinger\Eventnews\ViewHelpers\Filter;
 
 use GeorgRinger\Eventnews\Domain\Model\News;
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 class LocationViewHelper extends AbstractViewHelper
 {
@@ -13,15 +13,25 @@ class LocationViewHelper extends AbstractViewHelper
      */
     protected $escapeOutput = false;
 
-    /**
-     * @param object $locations
-     * @param object $news
-     * @param string $as
-     * @return mixed
-     * @throws \TYPO3\CMS\Fluid\Core\ViewHelper\Exception\InvalidVariableException
-     */
-    public function render($locations, $news, $as = 'filteredLocations')
+
+    public function initializeArguments()
     {
+        parent::initializeArguments();
+        $this->registerArgument('locations', 'object', 'Locations');
+        $this->registerArgument('news', 'object', 'News');
+        $this->registerArgument('as', 'string', 'as variable', false, 'filteredLocations');
+    }
+
+
+    /**
+     * @return string
+     */
+    public function render()
+    {
+        $locations = $this->arguments['locations'];
+        $news = $this->arguments['news'];
+        $as = $this->arguments['as'];
+
         $filteredLocations = $availableLocations = [];
         foreach ($locations as $locationItem) {
             $availableLocations[$locationItem->getUid()] = 1;

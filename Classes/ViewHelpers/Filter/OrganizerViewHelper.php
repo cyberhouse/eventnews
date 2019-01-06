@@ -3,7 +3,7 @@
 namespace GeorgRinger\Eventnews\ViewHelpers\Filter;
 
 use GeorgRinger\Eventnews\Domain\Model\News;
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 class OrganizerViewHelper extends AbstractViewHelper
 {
@@ -13,15 +13,23 @@ class OrganizerViewHelper extends AbstractViewHelper
      */
     protected $escapeOutput = false;
 
-    /**
-     * @param object $organizers
-     * @param object $news
-     * @param string $as
-     * @return mixed
-     * @throws \TYPO3\CMS\Fluid\Core\ViewHelper\Exception\InvalidVariableException
-     */
-    public function render($organizers, $news, $as = 'filteredOrganizers')
+
+    public function initializeArguments()
     {
+        parent::initializeArguments();
+        $this->registerArgument('organizers', 'object', 'Organizers');
+        $this->registerArgument('news', 'object', 'News');
+        $this->registerArgument('as', 'string', 'as variable', false, 'filteredOrganizers');
+    }
+
+    /**
+     * @return string
+     */
+    public function render()
+    {
+        $organizers = $this->arguments['organizers'];
+        $news = $this->arguments['news'];
+        $as = $this->arguments['as'];
         $filteredOrganizers = $availableOrganizers = [];
         foreach ($organizers as $organizerItem) {
             $availableOrganizers[$organizerItem->getUid()] = 1;
