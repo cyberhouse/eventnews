@@ -68,6 +68,9 @@ class AbstractDemandedRepository
 
             if ($demand->getYear()) {
                 $dateField = $demand->getDateField();
+                if (!$dateField) {
+                    $dateField = 'datetime';
+                }
 
                 if ($demand->getMonth() > 0) {
                     if ($demand->getDay() > 0) {
