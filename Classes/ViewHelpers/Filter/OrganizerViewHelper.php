@@ -13,7 +13,6 @@ class OrganizerViewHelper extends AbstractViewHelper
      */
     protected $escapeOutput = false;
 
-
     public function initializeArguments()
     {
         parent::initializeArguments();
