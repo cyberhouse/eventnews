@@ -26,7 +26,6 @@ class DayCompareViewHelper extends AbstractViewHelper
      */
     public function render()
     {
-
         $found = false;
 
         /** @var Demand $demand */
