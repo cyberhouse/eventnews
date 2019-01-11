@@ -29,7 +29,7 @@ class AbstractDemandedRepository
      */
     public function modify(array $params)
     {
-        if (get_class($params['demand']) !== 'GeorgRinger\\Eventnews\\Domain\\Model\\Dto\\Demand') {
+        if (get_class($params['demand']) !== Demand::class) {
             return;
         }
 
@@ -100,17 +100,20 @@ class AbstractDemandedRepository
             }
 
             // Time start
-            $converted = strtotime($demand->getSearchDateFrom());
-            if ($converted) {
-                $constraints[] = $query->greaterThanOrEqual('datetime', $converted);
+            $convertedDateStart = strtotime($demand->getSearchDateFrom());
+            if (!$convertedDateStart ) {
+                $convertedDateStart = PHP_INT_MIN;
             }
             // Time end
-            $converted = strtotime($demand->getSearchDateTo());
-            if ($converted) {
-                // add 23h59min to include program of that day
-                $converted += 86350;
-                $constraints[] = $query->lessThanOrEqual('datetime', $converted);
+            $convertedDateEnd = strtotime($demand->getSearchDateTo());
+            if ($convertedDateEnd) {
+                $convertedDateEnd += 86350;
+            } else {
+                $convertedDateEnd = PHP_INT_MAX;
             }
+            $dateConstraints = $this->getDateConstraint($query, 'datetime', $convertedDateStart, $convertedDateEnd);
+            $constraints['datetime'] = $query->logicalOr($dateConstraints);
+
             // Time restriction to include events with startdate in the past AND enddate in the future!
             if ($demand->getTimeRestriction()) {
                 $timeLimit = \GeorgRinger\News\Utility\ConstraintHelper::getTimeRestrictionLow($demand->getTimeRestriction());
