@@ -129,11 +129,9 @@
 				<f:for each="{news}" as="n">
 					<f:if condition="{overwriteDemand.day}">
 						<f:then>
-							<events:dayCompare newsItem="{n}" demand="{demand}">
-								<f:then>
-									<f:render section="listItem" arguments="{_all}" />
-								</f:then>
-							</events:dayCompare>
+                            <f:if condition="{events:dayCompare(newsItem:n,demand:demand)}">
+                                <f:render section="listItem" arguments="{_all}" />
+							</f:if>
 						</f:then>
 						<f:else>
 							<f:render section="listItem" arguments="{_all}" />
