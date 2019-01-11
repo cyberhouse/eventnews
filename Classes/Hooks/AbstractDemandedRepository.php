@@ -101,7 +101,7 @@ class AbstractDemandedRepository
 
             // Time start
             $convertedDateStart = strtotime($demand->getSearchDateFrom());
-            if (!$convertedDateStart ) {
+            if (!$convertedDateStart) {
                 $convertedDateStart = PHP_INT_MIN;
             }
             // Time end
