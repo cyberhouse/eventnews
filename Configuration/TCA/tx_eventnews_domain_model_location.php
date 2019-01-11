@@ -22,7 +22,7 @@ return [
             'endtime' => 'endtime',
         ],
         'searchFields' => 'title,description,lat,lng,link,',
-        'iconfile' => 'EXT:eventnews/Resources/Public/Icons/tx_eventnews_domain_model_location.gif'
+        'iconfile' => 'EXT:eventnews/Resources/Public/Icons/tx_eventnews_domain_model_location.svg'
     ],
     'interface' => [
         'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, description, lat, lng, link',
