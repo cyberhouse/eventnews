@@ -35,6 +35,24 @@ class NewsController extends \GeorgRinger\News\Controller\NewsController {
     ) {
         $demand = $this->getDemand($search, $overwriteDemand);
         $newsRecords = $this->newsRepository->findDemanded($demand);
+        
+        // get and merge events from last month
+        $overwriteDemandLastMonth = $overwriteDemand;
+        $overwriteDemandLastMonth["month"] = $overwriteDemand["month"] - 1;
+        if ($overwriteDemandLastMonth["month"] == 0){
+            $overwriteDemandLastMonth["month"] = 12;
+            $overwriteDemandLastMonth["year"] = $overwriteDemandLastMonth["year"] - 1;
+        }
+
+        $demandLastMonth = $this->getDemand($search, $overwriteDemandLastMonth);
+        $newsRecordsLastMonth = $this->newsRepository->findDemanded($demandLastMonth);
+
+        $i = $newsRecords->count();
+        foreach ($newsRecordsLastMonth as $value){
+            $newsRecords[$i] = (object)$value;
+            $i++;
+        }
+        
         $categories = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',', $this->settings['categories'], true);
 
         /** @var \GeorgRinger\News\Domain\Repository\CategoryRepository $categoryRepository */
