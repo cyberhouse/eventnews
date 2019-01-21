@@ -85,7 +85,7 @@
 			<h2>
 				<f:translate key="calendar" extensionName="eventnews" />
 			</h2>
-			<events:calendar newsList="{news}" demand="{demand}" firstDayOfWeek="1">
+			<events:calendar newsList="{newsWithNoDaySupport}" demand="{demand}" firstDayOfWeek="1">
 				<table class="table">
 					<tr class="title">
 						<th colspan="7">
@@ -114,7 +114,7 @@
 					<f:for each="{weeks}" as="week">
 						<tr>
 							<f:for each="{week}" as="day">
-								<f:render section="calday" arguments="{day:day, settings:settings}"></f:render>
+								<f:render section="calday" arguments="{day:day, settings:settings}" />
 							</f:for>
 						</tr>
 					</f:for>

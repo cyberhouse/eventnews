@@ -73,7 +73,7 @@ class AbstractDemandedRepository
                 }
 
                 if ($demand->getMonth() > 0) {
-                    if ($demand->getDay() > 0) {
+                    if ($demand->getRespectDay() && $demand->getDay() > 0) {
                         $begin = mktime(0, 0, 0, $demand->getMonth(), $demand->getDay(), $demand->getYear());
                         $end = mktime(23, 59, 59, $demand->getMonth(), $demand->getDay(), $demand->getYear());
                     } else {
@@ -86,7 +86,7 @@ class AbstractDemandedRepository
                 }
 
                 $dateConstraints = $this->getDateConstraint($query, $dateField, $begin, $end);
-                $constraints[] = $query->logicalOr($dateConstraints);
+                $constraints['datetime'] = $query->logicalOr($dateConstraints);
             }
 
             $organizers = $demand->getOrganizers();
@@ -112,7 +112,7 @@ class AbstractDemandedRepository
                 $convertedDateEnd = PHP_INT_MAX;
             }
             $dateConstraints = $this->getDateConstraint($query, 'datetime', $convertedDateStart, $convertedDateEnd);
-            $constraints[] = $query->logicalOr($dateConstraints);
+            $constraints['datetimeSearch'] = $query->logicalOr($dateConstraints);
 
             // Time restriction to include events with startdate in the past AND enddate in the future!
             if ($demand->getTimeRestriction()) {

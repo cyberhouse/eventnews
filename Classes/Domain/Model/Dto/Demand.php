@@ -25,6 +25,9 @@ class Demand extends \GeorgRinger\News\Domain\Model\Dto\NewsDemand
     /** @var string */
     protected $searchDateTo;
 
+    /** @var bool */
+    protected $respectDay = false;
+
     public function __construct(array $settings = null)
     {
         $this->eventRestriction = $settings['eventRestriction'];
@@ -144,4 +147,22 @@ class Demand extends \GeorgRinger\News\Domain\Model\Dto\NewsDemand
         }
         return $out;
     }
+
+    /**
+     * @return bool
+     */
+    public function getRespectDay(): bool
+    {
+        return $this->respectDay;
+    }
+
+    /**
+     * @param bool $respectDay
+     */
+    public function setRespectDay(bool $respectDay): void
+    {
+        $this->respectDay = $respectDay;
+    }
+
+
 }

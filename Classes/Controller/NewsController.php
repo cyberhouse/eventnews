@@ -35,7 +35,9 @@ class NewsController extends \GeorgRinger\News\Controller\NewsController
         array $overwriteDemand = null
     ) {
         $demand = $this->getDemand($search, $overwriteDemand);
-        $newsRecords = $this->newsRepository->findDemanded($demand);
+        $newsRecordsWithDaySupport = $this->newsRepository->findDemanded($demand);
+        $demand->setRespectDay(false);
+        $newsRecordsWithNoDaySupport = $this->newsRepository->findDemanded($demand);
         $categories = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',', $this->settings['categories'], true);
 
         /** @var \GeorgRinger\News\Domain\Repository\CategoryRepository $categoryRepository */
@@ -46,11 +48,8 @@ class NewsController extends \GeorgRinger\News\Controller\NewsController
             ]
         );
 
-        /** @var \GeorgRinger\News\Domain\Repository\TagRepository $tagRepository */
         $tagRepository = $this->objectManager->get(\GeorgRinger\News\Domain\Repository\TagRepository::class);
-        /** @var \GeorgRinger\Eventnews\Domain\Repository\LocationRepository $locationRepository */
         $locationRepository = $this->objectManager->get(\GeorgRinger\Eventnews\Domain\Repository\LocationRepository::class);
-        /** @var \GeorgRinger\Eventnews\Domain\Repository\OrganizerRepository $organizerRepository */
         $organizerRepository = $this->objectManager->get(\GeorgRinger\Eventnews\Domain\Repository\OrganizerRepository::class);
 
         $organizerPidList = $this->settings['startingpointOrganizer'] ? $this->settings['startingpointOrganizer'] : $this->settings['startingpoint'];
@@ -58,7 +57,8 @@ class NewsController extends \GeorgRinger\News\Controller\NewsController
 
         $assignedValues = [
             'search' => $search,
-            'news' => $newsRecords,
+            'news' => $newsRecordsWithDaySupport,
+            'newsWithNoDaySupport' => $newsRecordsWithNoDaySupport,
             'overwriteDemand' => $overwriteDemand,
             'demand' => $demand,
             'currentPageId' => $GLOBALS['TSFE']->id,
@@ -98,6 +98,7 @@ class NewsController extends \GeorgRinger\News\Controller\NewsController
         }
 
         $demand->setDay($overwriteDemand['day']);
+        $demand->setRespectDay(true);
 
         if (!is_null($search)) {
             $validCategories = [];
