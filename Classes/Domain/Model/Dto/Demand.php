@@ -163,6 +163,4 @@ class Demand extends \GeorgRinger\News\Domain\Model\Dto\NewsDemand
     {
         $this->respectDay = $respectDay;
     }
-
-
 }
