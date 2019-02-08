@@ -4,9 +4,9 @@
 
 ---
 conf.py:
-  copyright: 2017
+  copyright: 2019
   project: news events
-  version: 2.1.0
+  version: 3.3.0
   release:
   latex_documents:
   - - Index
