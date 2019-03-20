@@ -28,6 +28,7 @@ $fields = [
         'config' => [
             'default' => 0,
             'type' => 'input',
+            'renderType' => 'inputDateTime',
             'size' => 12,
             'eval' => 'datetime,int',
         ],
