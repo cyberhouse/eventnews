@@ -96,6 +96,7 @@ $GLOBALS['TCA']['tx_news_domain_model_news']['palettes']['palette_eventfields'] 
     'showitem' => 'organizer,organizer_simple, --linebreak--,location,location_simple'
 ];
 $GLOBALS['TCA']['tx_news_domain_model_news']['ctrl']['requestUpdate'] .= ',is_event';
+$GLOBALS['TCA']['tx_news_domain_model_news']['ctrl']['typeicon_classes']['userFunc'] = \GeorgRinger\Eventnews\Hooks\IconHook::class . '->run';
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('tx_news_domain_model_news', $fields);
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('tx_news_domain_model_news', 'is_event,--palette--;;palette_event', '', 'after:datetime');
