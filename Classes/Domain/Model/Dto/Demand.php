@@ -159,7 +159,7 @@ class Demand extends \GeorgRinger\News\Domain\Model\Dto\NewsDemand
     /**
      * @param bool $respectDay
      */
-    public function setRespectDay(bool $respectDay): void
+    public function setRespectDay(bool $respectDay)
     {
         $this->respectDay = $respectDay;
     }
