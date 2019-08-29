@@ -7,6 +7,7 @@ $fields = [
     'is_event' => [
         'exclude' => true,
         'label' => 'LLL:EXT:eventnews/Resources/Private/Language/locallang_db.xlf:tx_eventnews_domain_model_news.is_event',
+        'onChange' => 'reload',
         'config' => [
             'type' => 'check',
             'default' => 0
@@ -95,7 +96,6 @@ $GLOBALS['TCA']['tx_news_domain_model_news']['palettes']['palette_eventfields'] 
     'canNotCollapse' => true,
     'showitem' => 'organizer,organizer_simple, --linebreak--,location,location_simple'
 ];
-$GLOBALS['TCA']['tx_news_domain_model_news']['ctrl']['requestUpdate'] .= ',is_event';
 $GLOBALS['TCA']['tx_news_domain_model_news']['ctrl']['typeicon_classes']['userFunc'] = \GeorgRinger\Eventnews\Hooks\IconHook::class . '->run';
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('tx_news_domain_model_news', $fields);
