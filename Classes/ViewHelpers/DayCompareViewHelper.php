@@ -2,6 +2,13 @@
 
 namespace GeorgRinger\Eventnews\ViewHelpers;
 
+/**
+ * This file is part of the "eventnews" Extension for TYPO3 CMS.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
+ */
+
 use GeorgRinger\Eventnews\Domain\Model\Dto\Demand;
 use GeorgRinger\Eventnews\Domain\Model\News as EventNews;
 use GeorgRinger\News\Domain\Model\News;
@@ -50,7 +57,6 @@ class DayCompareViewHelper extends AbstractViewHelper
         if ($newsBeginDate <= $currentDay && $newsEndDate >= $currentDay) {
             $found = true;
         }
-//        print_r([$newsItem->getTitle(), (int)$found, 'day' => $currentDay, 'begin' => $newsBeginDate, 'end' => $newsEndDate]);
 
         return $found;
     }

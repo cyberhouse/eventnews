@@ -2,6 +2,13 @@
 
 namespace GeorgRinger\Eventnews\ViewHelpers\Filter;
 
+/**
+ * This file is part of the "eventnews" Extension for TYPO3 CMS.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
+ */
+
 use GeorgRinger\Eventnews\Domain\Model\News;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
