@@ -10,7 +10,9 @@ namespace GeorgRinger\Eventnews\ViewHelpers;
  */
 
 use TYPO3\CMS\Core\Utility\HttpUtility;
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
+use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
+use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
 
 /**
  * Redirect a given url
@@ -24,8 +26,10 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
  */
 class RedirectViewHelper extends AbstractViewHelper
 {
+    use CompileWithRenderStatic;
+
     /**
-     * register arguments
+     * Initialize arguments
      */
     public function initializeArguments()
     {
@@ -33,12 +37,19 @@ class RedirectViewHelper extends AbstractViewHelper
     }
 
     /**
-     * render
+     * @param array $arguments
+     * @param \Closure $renderChildrenClosure
+     * @param RenderingContextInterface $renderingContext
+     * @return void
      */
-    public function render()
+    public static function renderStatic(
+        array $arguments,
+        \Closure $renderChildrenClosure,
+        RenderingContextInterface $renderingContext
+    )
     {
-        if ($this->arguments['url']) {
-            HttpUtility::redirect($this->arguments['url']);
+        if ($arguments['url']) {
+            HttpUtility::redirect($arguments['url']);
         }
     }
 }
