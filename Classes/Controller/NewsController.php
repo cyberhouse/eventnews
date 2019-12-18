@@ -21,13 +21,13 @@ class NewsController extends \GeorgRinger\News\Controller\NewsController
      *
      * @param \GeorgRinger\Eventnews\Domain\Model\Dto\SearchDemand $search
      * @param array $overwriteDemand
-     * @ignorevalidation $search
-     * @return void
+     * @TYPO3\CMS\Extbase\Annotation\IgnoreValidation("search")
      */
     public function monthAction(
         \GeorgRinger\Eventnews\Domain\Model\Dto\SearchDemand $search = null,
         array $overwriteDemand = null
-    ) {
+    )
+    {
         $demand = $this->getDemand($search, $overwriteDemand);
         $newsRecordsWithDaySupport = $this->newsRepository->findDemanded($demand);
         $demand->setRespectDay(false);
@@ -46,8 +46,8 @@ class NewsController extends \GeorgRinger\News\Controller\NewsController
         $locationRepository = $this->objectManager->get(\GeorgRinger\Eventnews\Domain\Repository\LocationRepository::class);
         $organizerRepository = $this->objectManager->get(\GeorgRinger\Eventnews\Domain\Repository\OrganizerRepository::class);
 
-        $organizerPidList = $this->settings['startingpointOrganizer'] ? $this->settings['startingpointOrganizer'] : $this->settings['startingpoint'];
-        $locationPidList = $this->settings['startingpointLocation'] ? $this->settings['startingpointLocation'] : $this->settings['startingpoint'];
+        $organizerPidList = $this->settings['startingpointOrganizer'] ?: $this->settings['startingpoint'];
+        $locationPidList = $this->settings['startingpointLocation'] ?: $this->settings['startingpoint'];
 
         $assignedValues = [
             'search' => $search,
@@ -77,7 +77,8 @@ class NewsController extends \GeorgRinger\News\Controller\NewsController
     protected function getDemand(
         \GeorgRinger\Eventnews\Domain\Model\Dto\SearchDemand $search = null,
         array $overwriteDemand = null
-    ) {
+    )
+    {
         /** @var \GeorgRinger\Eventnews\Domain\Model\Dto\Demand $demand */
         $demand = $this->createDemandObjectFromSettings($this->settings,
             'GeorgRinger\\Eventnews\\Domain\\Model\\Dto\\Demand');
@@ -94,7 +95,7 @@ class NewsController extends \GeorgRinger\News\Controller\NewsController
         $demand->setDay($overwriteDemand['day']);
         $demand->setRespectDay(true);
 
-        if (!is_null($search)) {
+        if ($search !== null) {
             $validCategories = [];
             foreach ((array)$search->getCategories() as $cat) {
                 if ($cat) {
@@ -120,7 +121,7 @@ class NewsController extends \GeorgRinger\News\Controller\NewsController
      * @param string $timeString
      * @return array
      */
-    protected function getDateConfig($demand, $timeString = '')
+    protected function getDateConfig($demand, $timeString = ''): array
     {
         $date = \DateTime::createFromFormat('d.m.Y', sprintf('1.%s.%s', $demand->getMonth(), $demand->getYear()));
         if (!empty($timeString)) {
