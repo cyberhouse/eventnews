@@ -13,7 +13,7 @@ You need support?
 
 You have found a bug or need support?
 
-Please use the issue tracker at https://forge.typo3.org/projects/extension-eventnews/!
+Please use the issue tracker at https://github.com/georgringer/eventnews/issues
 
 Contribute
 ----------
