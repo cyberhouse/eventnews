@@ -36,6 +36,10 @@
     "replace": {
         "typo3-ter/eventnews": "self.version"
     },
+	"config": {
+		"vendor-dir": ".Build/vendor",
+		"bin-dir": ".Build/bin"
+	},
     "extra": {
         "typo3/cms": {
             "extension-key": "eventnews",
