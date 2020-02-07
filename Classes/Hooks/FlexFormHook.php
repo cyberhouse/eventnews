@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+
 namespace GeorgRinger\Eventnews\Hooks;
 
 /**
@@ -19,7 +20,7 @@ class FlexFormHook
      * @param array $identifier
      * @return array
      */
-    public function parseDataStructureByIdentifierPostProcess(array $dataStructure, array $identifier)
+    public function parseDataStructureByIdentifierPostProcess(array $dataStructure, array $identifier): array
     {
         if ($identifier['type'] === 'tca' && $identifier['tableName'] === 'tt_content' && $identifier['dataStructureKey'] === 'news_pi1,list') {
             $file = Environment::getPublicPath() . '/typo3conf/ext/eventnews/Configuration/Flexforms/flexform_eventnews.xml';

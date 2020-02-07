@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+
 namespace GeorgRinger\Eventnews\Hooks;
 
 /**
@@ -16,7 +17,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class FormEngineHook
 {
-    const FIELDS = 'full_day,event_end,organizer,organizer_simple,location,location_simple';
+    protected const FIELDS = 'full_day,event_end,organizer,organizer_simple,location,location_simple';
 
     /**
      * Remove rendered field from output if it is no event
