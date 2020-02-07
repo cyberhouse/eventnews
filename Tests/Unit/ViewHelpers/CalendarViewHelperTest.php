@@ -3,9 +3,10 @@
 namespace GeorgRinger\Eventnews\Tests\Unit\ViewHelper;
 
 use GeorgRinger\Eventnews\Domain\Model\News;
-use TYPO3\CMS\Core\Tests\UnitTestCase;
+use GeorgRinger\Eventnews\ViewHelpers\CalendarViewHelper;
+use TYPO3\TestingFramework\Core\BaseTestCase;
 
-class CalendarViewHelperTest extends UnitTestCase
+class CalendarViewHelperTest extends BaseTestCase
 {
 
     /**
@@ -14,9 +15,9 @@ class CalendarViewHelperTest extends UnitTestCase
      * @param int $day
      * @param string $list
      */
-    public function getCorrectNewsOfADay($day, $list)
+    public function getCorrectNewsOfADay($day, $list): void
     {
-        $calendarViewHelper = $this->getAccessibleMock('GeorgRinger\\Eventnews\\ViewHelpers\\CalendarViewHelper', ['dummy']);
+        $calendarViewHelper = $this->getAccessibleMock(CalendarViewHelper::class, ['dummy']);
 
         $currentDay = new \DateTime($day);
         $newsOfGivenDay = $calendarViewHelper->_call('getNewsForDay', $this->generateNewsList(), $currentDay);
@@ -31,9 +32,9 @@ class CalendarViewHelperTest extends UnitTestCase
     }
 
     /**
-     * @return News
+     * @return News[]
      */
-    protected function generateNewsList()
+    protected function generateNewsList(): array
     {
         $newsList = [];
         $data = [
@@ -77,7 +78,7 @@ class CalendarViewHelperTest extends UnitTestCase
     /**
      * @return array
      */
-    public function newsOfADayProvider()
+    public function newsOfADayProvider(): array
     {
         return [
             ['2015-04-01', ''],

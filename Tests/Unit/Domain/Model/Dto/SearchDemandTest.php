@@ -3,15 +3,15 @@
 namespace GeorgRinger\Eventnews\Tests\Unit\Domain\Model;
 
 use GeorgRinger\Eventnews\Domain\Model\Dto\SearchDemand;
-use TYPO3\CMS\Core\Tests\UnitTestCase;
+use TYPO3\TestingFramework\Core\BaseTestCase;
 
-class SearchDemandTest extends UnitTestCase
+class SearchDemandTest extends BaseTestCase
 {
 
     /** @var SearchDemand */
     protected $subject = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->subject = new SearchDemand();
     }
@@ -19,7 +19,7 @@ class SearchDemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function setOrganizer()
+    public function setOrganizer(): void
     {
         $value = [
             3 => 3,
@@ -33,7 +33,7 @@ class SearchDemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function setLocation()
+    public function setLocation(): void
     {
         $value = [
             4 => 4,
@@ -48,7 +48,7 @@ class SearchDemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function setCategory()
+    public function setCategory(): void
     {
         $value = [
             5 => 5,

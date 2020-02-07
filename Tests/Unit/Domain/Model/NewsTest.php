@@ -5,9 +5,9 @@ namespace GeorgRinger\Eventnews\Tests\Unit\Domain\Model;
 use GeorgRinger\Eventnews\Domain\Model\Location;
 use GeorgRinger\Eventnews\Domain\Model\News;
 use GeorgRinger\Eventnews\Domain\Model\Organizer;
-use TYPO3\CMS\Core\Tests\UnitTestCase;
+use TYPO3\TestingFramework\Core\BaseTestCase;
 
-class NewsTest extends UnitTestCase
+class NewsTest extends BaseTestCase
 {
 
     /**
@@ -15,7 +15,7 @@ class NewsTest extends UnitTestCase
      */
     protected $subject = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->subject = new News();
     }
@@ -23,7 +23,7 @@ class NewsTest extends UnitTestCase
     /**
      * @test
      */
-    public function setIsEvent()
+    public function setIsEvent(): void
     {
         $value = true;
         $this->subject->setIsEvent($value);
@@ -34,7 +34,7 @@ class NewsTest extends UnitTestCase
     /**
      * @test
      */
-    public function setFullDay()
+    public function setFullDay(): void
     {
         $value = true;
         $this->subject->setFullDay($value);
@@ -45,7 +45,7 @@ class NewsTest extends UnitTestCase
     /**
      * @test
      */
-    public function setEventEnd()
+    public function setEventEnd(): void
     {
         $value = new \DateTime('2014-10-10');
         $this->subject->setEventEnd($value);
@@ -56,7 +56,7 @@ class NewsTest extends UnitTestCase
     /**
      * @test
      */
-    public function setOrganizer()
+    public function setOrganizer(): void
     {
         $value = new Organizer();
         $value->setTitle('Organizer 1');
@@ -68,7 +68,7 @@ class NewsTest extends UnitTestCase
     /**
      * @test
      */
-    public function setLocation()
+    public function setLocation(): void
     {
         $value = new Location();
         $value->setTitle('Location1 1');

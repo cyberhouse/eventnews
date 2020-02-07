@@ -3,15 +3,15 @@
 namespace GeorgRinger\Eventnews\Tests\Unit\Domain\Model;
 
 use GeorgRinger\Eventnews\Domain\Model\Organizer;
-use TYPO3\CMS\Core\Tests\UnitTestCase;
+use TYPO3\TestingFramework\Core\BaseTestCase;
 
-class OrganizerTest extends UnitTestCase
+class OrganizerTest extends BaseTestCase
 {
 
     /** @var Organizer */
     protected $subject = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->subject = new Organizer();
     }
@@ -19,7 +19,7 @@ class OrganizerTest extends UnitTestCase
     /**
      * @test
      */
-    public function setTitleForStringSetsTitle()
+    public function setTitleForStringSetsTitle(): void
     {
         $value = 'A title';
         $this->subject->setTitle($value);
@@ -30,7 +30,7 @@ class OrganizerTest extends UnitTestCase
     /**
      * @test
      */
-    public function setDescription()
+    public function setDescription(): void
     {
         $value = 'A description';
         $this->subject->setDescription($value);
@@ -41,7 +41,7 @@ class OrganizerTest extends UnitTestCase
     /**
      * @test
      */
-    public function setLink()
+    public function setLink(): void
     {
         $value = 'www.typo3.org';
         $this->subject->setLink($value);

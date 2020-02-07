@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace GeorgRinger\Eventnews\Domain\Repository;
 
@@ -10,6 +11,8 @@ namespace GeorgRinger\Eventnews\Domain\Repository;
  */
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
 class AbstractRepository extends Repository
@@ -20,11 +23,11 @@ class AbstractRepository extends Repository
      * @var array
      */
     protected $defaultOrderings = [
-        'title' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING,
+        'title' => QueryInterface::ORDER_ASCENDING,
     ];
 
     /**
-     * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     * @return QueryResultInterface
      */
     public function findAll()
     {
@@ -35,7 +38,7 @@ class AbstractRepository extends Repository
 
     /**
      * @param $pidList
-     * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     * @return QueryResultInterface
      */
     public function findByStartingPoint($pidList)
     {
@@ -53,7 +56,7 @@ class AbstractRepository extends Repository
     }
 
     /**
-     * @return \TYPO3\CMS\Extbase\Persistence\QueryInterface
+     * @return QueryInterface
      */
     protected function getQuery()
     {

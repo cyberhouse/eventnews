@@ -16,9 +16,8 @@ class NewsImportAspect
     /**
      * @param array $importData
      * @param \GeorgRinger\News\Domain\Model\News $news
-     * @return void
      */
-    public function postHydrate(array $importData, $news)
+    public function postHydrate(array $importData, $news): void
     {
         /** @var \GeorgRinger\Eventnews\Domain\Model\News $news */
         if (is_array($importData['_dynamicData'])) {

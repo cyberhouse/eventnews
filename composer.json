@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
     "name": "georgringer/eventnews",
     "type": "typo3-cms-extension",
     "description": "Extend EXT:news with event and calendar functionality",
@@ -40,4 +41,29 @@
             "web-dir": ".Build/Web"
         }
     }
+=======
+	"name": "georgringer/eventnews",
+	"type": "typo3-cms-extension",
+	"description": "Extend EXT:news with event and calendar functionality",
+	"homepage": "https://ringer.it",
+	"license": ["GPL-2.0-or-later"],
+	"require": {
+		"typo3/cms-core": "^9.5 || 10",
+		"georgringer/news": "^7 || ^ 8.0"
+	},
+	"autoload": {
+		"psr-4": {
+			"GeorgRinger\\Eventnews\\": "Classes"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"GeorgRinger\\Eventnews\\Tests\\": "Tests"
+		}
+	},
+	"replace": {
+		"eventnews": "self.version",
+		"typo3-ter/eventnews": "self.version"
+	}
+>>>>>>> [TASK] Start with 4.0
 }

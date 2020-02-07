@@ -21,7 +21,6 @@ class PageLayoutView
      *
      * @param array $params
      * @param \GeorgRinger\News\Hooks\PageLayoutView $pageLayout
-     * @return void
      */
     public function extensionSummary(array $params, \GeorgRinger\News\Hooks\PageLayoutView $pageLayout)
     {

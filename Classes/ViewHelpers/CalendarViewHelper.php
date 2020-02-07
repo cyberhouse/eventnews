@@ -3,7 +3,7 @@
 namespace GeorgRinger\Eventnews\ViewHelpers;
 
 use GeorgRinger\Eventnews\Domain\Model\Dto\Demand;
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 class CalendarViewHelper extends AbstractViewHelper
 {
