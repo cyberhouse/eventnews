@@ -6,7 +6,7 @@
 	<div class="row">
 		<div class="col-md-2">
 			<h3>
-				<f:translate key="filter" />
+				<f:translate key="filter" extensionName="eventnews" />
 			</h3>
 			<f:form method="post" action="month" object="{search}" name="search" arguments="{overwriteDemand:overwriteDemand}">
 				<input type="hidden" name="id" value="{currentPageId}" />
@@ -148,7 +148,7 @@
 	<div class="col-md-12" style="border: 1px solid #ccc;">
 		<strong>
 			<n:link newsItem="{n}" settings="{settings}">{n.title}</n:link>
-			| {f:format.date(date:n.datetime.date,format:'%d.%m')}</strong>
+			| {f:format.date(date:n.datetime,format:'%d.%m')}</strong>
 		<ul>
 			<f:if condition="{n.organizer}">
 				<li><strong>
@@ -168,7 +168,7 @@
 				<li>
 					<strong>
 						<f:translate key="event_end" extensionName="eventnews" />
-					</strong>: {f:format.date(date:n.eventEnd.date,format:'%d.%m.%Y')}
+					</strong>: {f:format.date(date:n.eventEnd,format:'%d.%m.%Y')}
 				</li>
 			</f:if>
 		</ul>
