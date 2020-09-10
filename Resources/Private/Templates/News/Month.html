@@ -91,15 +91,15 @@
 						<th colspan="7">
 							<ul class="pager">
 								<li class="previous">
-									<f:link.page rel="nofollow" pageUid="{currentPageId}" additionalParams="{tx_news_pi1:{overwriteDemand:{month:previousMonthData.month,year:previousMonthData.year}}}">
+									<f:link.action controller="News" action="month" arguments="{overwriteDemand:{month:previousMonthData.month,year:previousMonthData.year}}" pageUid="{currentPageId}" rel="nofollow">
 										&larr; {f:format.date(date:previousMonthData.date,format:'%B %Y')}
-									</f:link.page>
+									</f:link.action>
 								</li>
 								<li>{f:format.date(date:currentMonthData.date,format:'%B %Y')}</li>
 								<li class="next">
-									<f:link.page rel="nofollow" pageUid="{currentPageId}" additionalParams="{tx_news_pi1:{overwriteDemand:{month:nextMonthData.month,year:nextMonthData.year}}}">
+									<f:link.action controller="News" action="month" arguments="{overwriteDemand:{month:nextMonthData.month,year:nextMonthData.year}}" pageUid="{currentPageId}" rel="nofollow">
 										{f:format.date(date:nextMonthData.date,format:'%B %Y')} &rarr;
-									</f:link.page>
+									</f:link.action>
 								</li>
 							</ul>
 						</th>
