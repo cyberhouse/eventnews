@@ -3,9 +3,9 @@
 namespace GeorgRinger\Eventnews\Tests\Unit\Domain\Model;
 
 use GeorgRinger\Eventnews\Domain\Model\Location;
-use TYPO3\CMS\Core\Tests\UnitTestCase;
+use TYPO3\TestingFramework\Core\BaseTestCase;
 
-class LocationTest extends UnitTestCase
+class LocationTest extends BaseTestCase
 {
 
     /**
@@ -13,7 +13,7 @@ class LocationTest extends UnitTestCase
      */
     protected $subject = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->subject = new Location();
     }
@@ -21,7 +21,7 @@ class LocationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setTitle()
+    public function setTitle(): void
     {
         $value = 'A title';
         $this->subject->setTitle($value);
@@ -32,7 +32,7 @@ class LocationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setDescription()
+    public function setDescription(): void
     {
         $value = 'A description';
         $this->subject->setDescription($value);
@@ -43,7 +43,7 @@ class LocationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setLng()
+    public function setLng(): void
     {
         $value = 1.2;
         $this->subject->setLng($value);
@@ -54,7 +54,7 @@ class LocationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setLat()
+    public function setLat(): void
     {
         $value = 2.3;
         $this->subject->setLat($value);
@@ -65,7 +65,7 @@ class LocationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setLink()
+    public function setLink(): void
     {
         $value = 'montagmorgen.at';
         $this->subject->setLink($value);

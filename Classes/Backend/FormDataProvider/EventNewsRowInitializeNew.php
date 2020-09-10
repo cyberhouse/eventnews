@@ -1,18 +1,12 @@
 <?php
-
+declare(strict_types=1);
 namespace GeorgRinger\Eventnews\Backend\FormDataProvider;
 
-/*
- * This file is part of the TYPO3 CMS project.
- *
- * It is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License, either version 2
- * of the License, or any later version.
+/**
+ * This file is part of the "eventnews" Extension for TYPO3 CMS.
  *
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
- *
- * The TYPO3 project - inspiring people to share!
  */
 
 use TYPO3\CMS\Backend\Form\FormDataProviderInterface;
@@ -33,7 +27,7 @@ class EventNewsRowInitializeNew implements FormDataProviderInterface
             return $result;
         }
 
-        if (is_array($result['pageTsConfig']['tx_news.']) && (int)$result['pageTsConfig']['tx_news.']['newRecordAsEvent'] == 1) {
+        if (is_array($result['pageTsConfig']['tx_news.']) && (bool)$result['pageTsConfig']['tx_news.']['newRecordAsEvent']) {
             $result['databaseRow']['is_event'] = 1;
         }
 

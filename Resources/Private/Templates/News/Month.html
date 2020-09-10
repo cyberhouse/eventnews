@@ -6,7 +6,7 @@
 	<div class="row">
 		<div class="col-md-2">
 			<h3>
-				<f:translate key="filter" />
+				<f:translate key="filter" extensionName="eventnews" />
 			</h3>
 			<f:form method="post" action="month" object="{search}" name="search" arguments="{overwriteDemand:overwriteDemand}">
 				<input type="hidden" name="id" value="{currentPageId}" />
@@ -85,7 +85,7 @@
 			<h2>
 				<f:translate key="calendar" extensionName="eventnews" />
 			</h2>
-			<events:calendar newsList="{news}" demand="{demand}" firstDayOfWeek="1">
+			<events:calendar newsList="{newsWithNoDaySupport}" demand="{demand}" firstDayOfWeek="1">
 				<table class="table">
 					<tr class="title">
 						<th colspan="7">
@@ -114,7 +114,7 @@
 					<f:for each="{weeks}" as="week">
 						<tr>
 							<f:for each="{week}" as="day">
-								<f:render section="calday" arguments="{day:day, settings:settings}"></f:render>
+								<f:render section="calday" arguments="{day:day, settings:settings}" />
 							</f:for>
 						</tr>
 					</f:for>
@@ -129,11 +129,9 @@
 				<f:for each="{news}" as="n">
 					<f:if condition="{overwriteDemand.day}">
 						<f:then>
-							<events:dayCompare newsItem="{n}" demand="{demand}">
-								<f:then>
-									<f:render section="listItem" arguments="{_all}" />
-								</f:then>
-							</events:dayCompare>
+                            <f:if condition="{events:dayCompare(newsItem:n,demand:demand)}">
+                                <f:render section="listItem" arguments="{_all}" />
+							</f:if>
 						</f:then>
 						<f:else>
 							<f:render section="listItem" arguments="{_all}" />
@@ -150,7 +148,7 @@
 	<div class="col-md-12" style="border: 1px solid #ccc;">
 		<strong>
 			<n:link newsItem="{n}" settings="{settings}">{n.title}</n:link>
-			| {f:format.date(date:n.datetime.date,format:'%d.%m')}</strong>
+			| {f:format.date(date:n.datetime,format:'%d.%m')}</strong>
 		<ul>
 			<f:if condition="{n.organizer}">
 				<li><strong>
@@ -170,7 +168,7 @@
 				<li>
 					<strong>
 						<f:translate key="event_end" extensionName="eventnews" />
-					</strong>: {f:format.date(date:n.eventEnd.date,format:'%d.%m.%Y')}
+					</strong>: {f:format.date(date:n.eventEnd,format:'%d.%m.%Y')}
 				</li>
 			</f:if>
 		</ul>
@@ -183,7 +181,7 @@
 			<f:if condition="{day.news}">
 				<f:then>
 					<strong>
-						<f:link.action action="month" addQueryString="1" additionalParams="{tx_news_pi1:{overwriteDemand:{day:day.day}}}">{day.day}</f:link.action>
+						<f:link.action action="month" addQueryString="1" additionalParams="{tx_news_pi1:{overwriteDemand:{year:day.year,month:day.month,day:day.day}}}">{day.day}</f:link.action>
 					</strong>
 
 					<f:for each="{day.news}" as="newsItem">

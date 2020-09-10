@@ -2,7 +2,8 @@
 
 namespace GeorgRinger\Eventnews\ViewHelpers;
 
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
+use GeorgRinger\Eventnews\Domain\Model\Dto\Demand;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 class CalendarViewHelper extends AbstractViewHelper
 {
@@ -13,20 +14,29 @@ class CalendarViewHelper extends AbstractViewHelper
     protected $escapeOutput = false;
 
     /**
-     * @param mixed $newsList
-     * @param \GeorgRinger\Eventnews\Domain\Model\Dto\Demand $demand
-     * @param int $firstDayOfWeek 0 for Sunday, 1 for Monday
+     * register arguments
+     */
+    public function initializeArguments()
+    {
+        $this->registerArgument('newsList', 'mixed', '', true);
+        $this->registerArgument('demand', Demand::class, '', true);
+        $this->registerArgument('firstDayOfWeek', 'integer', '0 for Sunday, 1 for Monday', false, 0);
+    }
+
+    /**
      * @return string Rendered result
      */
-    public function render($newsList, $demand, $firstDayOfWeek = 0)
+    public function render()
     {
+        /** @var Demand $demand */
+        $demand = $this->arguments['demand'];
         $month = $demand->getMonth();
         $year = $demand->getYear();
 
         $firstDayOfMonth = mktime(0, 0, 0, $month, 1, $year);
         $dayOfWeekOfFirstDay = (int)date('w', $firstDayOfMonth);
 
-        $firstDayOfCalendar = 1 - $dayOfWeekOfFirstDay + $firstDayOfWeek;
+        $firstDayOfCalendar = 1 - $dayOfWeekOfFirstDay + $this->arguments['firstDayOfWeek'];
         $ld = (int)date('t', $firstDayOfMonth);
         if ($firstDayOfCalendar > 1) {
             $firstDayOfCalendar -= 7;
@@ -60,7 +70,7 @@ class CalendarViewHelper extends AbstractViewHelper
 
                 if ($inCurrentMonthBefore && !$inCurrentMonthAfter) {
                     $t = \DateTime::createFromFormat('d-m-Y H:i:s', sprintf('%s-%s-%s 00:00:01', $day['day'], $month, $year));
-                    $day['news'] = $this->getNewsForDay($newsList, $t);
+                    $day['news'] = $this->getNewsForDay($this->arguments['newsList'], $t);
                 }
                 $firstDayOfCalendar++;
                 $week[] = $day;

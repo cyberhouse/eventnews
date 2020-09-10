@@ -3,15 +3,15 @@
 namespace GeorgRinger\Eventnews\Tests\Unit\Domain\Model;
 
 use GeorgRinger\Eventnews\Domain\Model\Dto\Demand;
-use TYPO3\CMS\Core\Tests\UnitTestCase;
+use TYPO3\TestingFramework\Core\BaseTestCase;
 
-class DemandTest extends UnitTestCase
+class DemandTest extends BaseTestCase
 {
 
     /** @var Demand */
     protected $subject = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->subject = new Demand();
     }
@@ -19,7 +19,7 @@ class DemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function setOrganizer()
+    public function setOrganizer():void
     {
         $value = [
             3 => 3,
@@ -33,7 +33,7 @@ class DemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function setLocation()
+    public function setLocation():void
     {
         $value = [
             4 => 4,

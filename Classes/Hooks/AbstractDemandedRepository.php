@@ -2,17 +2,11 @@
 
 namespace GeorgRinger\Eventnews\Hooks;
 
-/*
- * This file is part of the TYPO3 CMS project.
- *
- * It is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License, either version 2
- * of the License, or any later version.
+/**
+ * This file is part of the "eventnews" Extension for TYPO3 CMS.
  *
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
- *
- * The TYPO3 project - inspiring people to share!
  */
 
 use GeorgRinger\Eventnews\Domain\Model\Dto\Demand;
@@ -29,12 +23,16 @@ class AbstractDemandedRepository
      */
     public function modify(array $params)
     {
-        if (get_class($params['demand']) !== 'GeorgRinger\\Eventnews\\Domain\\Model\\Dto\\Demand') {
+        if (get_class($params['demand']) !== Demand::class) {
             return;
         }
 
-        $this->updateEventConstraints($params['demand'], $params['respectEnableFields'], $params['query'],
-            $params['constraints']);
+        $this->updateEventConstraints(
+            $params['demand'],
+            $params['respectEnableFields'],
+            $params['query'],
+            $params['constraints']
+        );
     }
 
     /**
@@ -62,14 +60,23 @@ class AbstractDemandedRepository
             unset($constraints['datetime']);
             $constraints[] = $query->equals('isEvent', 1);
 
-            if ($demand->getMonth() && $demand->getYear()) {
+            if ($demand->getYear()) {
                 $dateField = $demand->getDateField();
-                if ($demand->getDay()) {
-                    $begin = mktime(0, 0, 0, $demand->getMonth(), $demand->getDay(), $demand->getYear());
-                    $end = mktime(23, 59, 59, $demand->getMonth(), $demand->getDay(), $demand->getYear());
+                if (!$dateField) {
+                    $dateField = 'datetime';
+                }
+
+                if ($demand->getMonth() > 0) {
+                    if ($demand->getRespectDay() && $demand->getDay() > 0) {
+                        $begin = mktime(0, 0, 0, $demand->getMonth(), $demand->getDay(), $demand->getYear());
+                        $end = mktime(23, 59, 59, $demand->getMonth(), $demand->getDay(), $demand->getYear());
+                    } else {
+                        $begin = mktime(0, 0, 0, $demand->getMonth(), 1, $demand->getYear());
+                        $end = mktime(23, 59, 59, ($demand->getMonth() + 1), 0, $demand->getYear());
+                    }
                 } else {
-                    $begin = mktime(0, 0, 0, $demand->getMonth(), 1, $demand->getYear());
-                    $end = mktime(23, 59, 59, ($demand->getMonth() + 1), 0, $demand->getYear());
+                    $begin = mktime(0, 0, 0, 1, 1, $demand->getYear());
+                    $end = mktime(23, 59, 59, 12, 31, $demand->getYear());
                 }
 
                 $dateConstraints = $this->getDateConstraint($query, $dateField, $begin, $end);
@@ -87,23 +94,26 @@ class AbstractDemandedRepository
             }
 
             // Time start
-            $converted = strtotime($demand->getSearchDateFrom());
-            if ($converted) {
-                $constraints[] = $query->greaterThanOrEqual('datetime', $converted);
+            $convertedDateStart = strtotime($demand->getSearchDateFrom());
+            if (!$convertedDateStart) {
+                $convertedDateStart = PHP_INT_MIN;
             }
             // Time end
-            $converted = strtotime($demand->getSearchDateTo());
-            if ($converted) {
-                // add 23h59min to include program of that day
-                $converted += 86350;
-                $constraints[] = $query->lessThanOrEqual('datetime', $converted);
+            $convertedDateEnd = strtotime($demand->getSearchDateTo());
+            if ($convertedDateEnd) {
+                $convertedDateEnd += 86350;
+            } else {
+                $convertedDateEnd = PHP_INT_MAX;
             }
+            $dateConstraints = $this->getDateConstraint($query, 'datetime', $convertedDateStart, $convertedDateEnd);
+            $constraints['datetimeSearch'] = $query->logicalOr($dateConstraints);
+
             // Time restriction to include events with startdate in the past AND enddate in the future!
             if ($demand->getTimeRestriction()) {
                 $timeLimit = \GeorgRinger\News\Utility\ConstraintHelper::getTimeRestrictionLow($demand->getTimeRestriction());
-                $constraints['timeRestrictionGreater'] = $query->greaterThanOrEqual(
-                    'eventEnd',
-                    $timeLimit
+                $constraints['timeRestrictionGreater'] = $query->logicalOr(
+                    $query->greaterThanOrEqual('eventEnd', $timeLimit),
+                    $query->greaterThanOrEqual('datetime', $timeLimit)
                 );
             }
         }
