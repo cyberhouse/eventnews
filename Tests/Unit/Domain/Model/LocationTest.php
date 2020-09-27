@@ -3,67 +3,73 @@
 namespace GeorgRinger\Eventnews\Tests\Unit\Domain\Model;
 
 use GeorgRinger\Eventnews\Domain\Model\Location;
-use TYPO3\CMS\Core\Tests\UnitTestCase;
+use TYPO3\TestingFramework\Core\BaseTestCase;
 
-class LocationTest extends UnitTestCase {
+class LocationTest extends BaseTestCase
+{
 
-	/**
-	 * @var Location
-	 */
-	protected $subject = NULL;
+    /**
+     * @var Location
+     */
+    protected $subject = null;
 
-	protected function setUp() {
-		$this->subject = new Location();
-	}
+    protected function setUp(): void
+    {
+        $this->subject = new Location();
+    }
 
-	/**
-	 * @test
-	 */
-	public function setTitle() {
-		$value = 'A title';
-		$this->subject->setTitle($value);
+    /**
+     * @test
+     */
+    public function setTitle(): void
+    {
+        $value = 'A title';
+        $this->subject->setTitle($value);
 
-		$this->assertEquals($value, $this->subject->getTitle());
-	}
+        $this->assertEquals($value, $this->subject->getTitle());
+    }
 
-	/**
-	 * @test
-	 */
-	public function setDescription() {
-		$value = 'A description';
-		$this->subject->setDescription($value);
+    /**
+     * @test
+     */
+    public function setDescription(): void
+    {
+        $value = 'A description';
+        $this->subject->setDescription($value);
 
-		$this->assertEquals($value, $this->subject->getDescription());
-	}
+        $this->assertEquals($value, $this->subject->getDescription());
+    }
 
-	/**
-	 * @test
-	 */
-	public function setLng() {
-		$value = 1.2;
-		$this->subject->setLng($value);
+    /**
+     * @test
+     */
+    public function setLng(): void
+    {
+        $value = 1.2;
+        $this->subject->setLng($value);
 
-		$this->assertEquals($value, $this->subject->getLng());
-	}
+        $this->assertEquals($value, $this->subject->getLng());
+    }
 
-	/**
-	 * @test
-	 */
-	public function setLat() {
-		$value = 2.3;
-		$this->subject->setLat($value);
+    /**
+     * @test
+     */
+    public function setLat(): void
+    {
+        $value = 2.3;
+        $this->subject->setLat($value);
 
-		$this->assertEquals($value, $this->subject->getLat());
-	}
+        $this->assertEquals($value, $this->subject->getLat());
+    }
 
-	/**
-	 * @test
-	 */
-	public function setLink() {
-		$value = 'montagmorgen.at';
-		$this->subject->setLink($value);
+    /**
+     * @test
+     */
+    public function setLink(): void
+    {
+        $value = 'montagmorgen.at';
+        $this->subject->setLink($value);
 
-		$this->assertEquals($value, $this->subject->getLink());
-	}
-
+        $this->assertEquals($value, $this->subject->getLink());
+    }
 }

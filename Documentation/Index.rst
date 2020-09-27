@@ -30,7 +30,7 @@ news events
 		news,calendar,extbase,events
 
 	:Copyright:
-		2015
+		2017
 
 	:Author:
 		Georg Ringer

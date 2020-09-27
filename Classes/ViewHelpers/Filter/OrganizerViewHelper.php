@@ -2,22 +2,41 @@
 
 namespace GeorgRinger\Eventnews\ViewHelpers\Filter;
 
+/**
+ * This file is part of the "eventnews" Extension for TYPO3 CMS.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
+ */
+
 use GeorgRinger\Eventnews\Domain\Model\News;
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 class OrganizerViewHelper extends AbstractViewHelper
 {
 
     /**
-     * @param object $organizers
-     * @param object $news
-     * @param string $as
-     * @return mixed
-     * @throws \TYPO3\CMS\Fluid\Core\ViewHelper\Exception\InvalidVariableException
+     * @var bool
      */
-    public function render($organizers, $news, $as = 'filteredOrganizers')
+    protected $escapeOutput = false;
+
+    public function initializeArguments()
     {
-        $filteredOrganizers = $availableOrganizers = array();
+        parent::initializeArguments();
+        $this->registerArgument('organizers', 'object', 'Organizers');
+        $this->registerArgument('news', 'object', 'News');
+        $this->registerArgument('as', 'string', 'as variable', false, 'filteredOrganizers');
+    }
+
+    /**
+     * @return string
+     */
+    public function render()
+    {
+        $organizers = $this->arguments['organizers'];
+        $news = $this->arguments['news'];
+        $as = $this->arguments['as'];
+        $filteredOrganizers = $availableOrganizers = [];
         foreach ($organizers as $organizerItem) {
             $availableOrganizers[$organizerItem->getUid()] = 1;
         }

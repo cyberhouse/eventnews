@@ -2,65 +2,70 @@
 
 namespace GeorgRinger\Eventnews\Controller;
 
-/*
- * This file is part of the TYPO3 CMS project.
- *
- * It is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License, either version 2
- * of the License, or any later version.
+/**
+ * This file is part of the "eventnews" Extension for TYPO3 CMS.
  *
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
- *
- * The TYPO3 project - inspiring people to share!
  */
 
 /**
  * Class GeorgRinger\Eventnews\Controller\NewsController
  */
-class NewsController extends \GeorgRinger\News\Controller\NewsController {
+class NewsController extends \GeorgRinger\News\Controller\NewsController
+{
+    const SIGNAL_NEWS_MONTH_ACTION = 'monthAction';
 
     /**
      * Month view
      *
      * @param \GeorgRinger\Eventnews\Domain\Model\Dto\SearchDemand $search
      * @param array $overwriteDemand
-     * @ignorevalidation $search
-     * @dontverifyrequesthash
-     * @return void
+     * @TYPO3\CMS\Extbase\Annotation\IgnoreValidation("search")
      */
     public function monthAction(
         \GeorgRinger\Eventnews\Domain\Model\Dto\SearchDemand $search = null,
         array $overwriteDemand = null
-    ) {
+    )
+    {
         $demand = $this->getDemand($search, $overwriteDemand);
-        $newsRecords = $this->newsRepository->findDemanded($demand);
+        $newsRecordsWithDaySupport = $this->newsRepository->findDemanded($demand);
+        $demand->setRespectDay(false);
+        $newsRecordsWithNoDaySupport = $this->newsRepository->findDemanded($demand);
         $categories = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',', $this->settings['categories'], true);
 
         /** @var \GeorgRinger\News\Domain\Repository\CategoryRepository $categoryRepository */
         $categoryRepository = $this->objectManager->get(\GeorgRinger\News\Domain\Repository\CategoryRepository::class);
-        /** @var \GeorgRinger\Eventnews\Domain\Repository\LocationRepository $locationRepository */
+        $categoryRepository->setDefaultOrderings(
+            [
+                'title' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING
+            ]
+        );
+
+        $tagRepository = $this->objectManager->get(\GeorgRinger\News\Domain\Repository\TagRepository::class);
         $locationRepository = $this->objectManager->get(\GeorgRinger\Eventnews\Domain\Repository\LocationRepository::class);
-        /** @var \GeorgRinger\Eventnews\Domain\Repository\OrganizerRepository $organizerRepository */
         $organizerRepository = $this->objectManager->get(\GeorgRinger\Eventnews\Domain\Repository\OrganizerRepository::class);
 
-        $organizerPidList = $this->settings['startingpointOrganizer'] ? $this->settings['startingpointOrganizer'] : $this->settings['startingpoint'];
-        $locationPidList = $this->settings['startingpointLocation'] ? $this->settings['startingpointLocation'] : $this->settings['startingpoint'];
+        $organizerPidList = $this->settings['startingpointOrganizer'] ?: $this->settings['startingpoint'];
+        $locationPidList = $this->settings['startingpointLocation'] ?: $this->settings['startingpoint'];
 
-        $assignedValues = array(
+        $assignedValues = [
             'search' => $search,
-            'news' => $newsRecords,
+            'news' => $newsRecordsWithDaySupport,
+            'newsWithNoDaySupport' => $newsRecordsWithNoDaySupport,
             'overwriteDemand' => $overwriteDemand,
             'demand' => $demand,
             'currentPageId' => $GLOBALS['TSFE']->id,
             'allOrganizers' => $organizerRepository->findByStartingPoint($organizerPidList),
             'allLocations' => $locationRepository->findByStartingPoint($locationPidList),
-            'allCategories' => empty($categories) ? array() : $categoryRepository->findByIdList($categories),
+            'allCategories' => empty($categories) ? [] : $categoryRepository->findByIdList($categories),
+            'allTags' => empty($this->settings['tags']) ? [] : $tagRepository->findByIdList(explode(',', $this->settings['tags'])),
             'previousMonthData' => $this->getDateConfig($demand, '-1 month'),
             'nextMonthData' => $this->getDateConfig($demand, '+1 month'),
             'currentMonthData' => $this->getDateConfig($demand),
-        );
+        ];
 
+        $assignedValues = $this->emitActionSignal('NewsController', self::SIGNAL_NEWS_MONTH_ACTION, $assignedValues);
         $this->view->assignMultiple($assignedValues);
     }
 
@@ -72,7 +77,8 @@ class NewsController extends \GeorgRinger\News\Controller\NewsController {
     protected function getDemand(
         \GeorgRinger\Eventnews\Domain\Model\Dto\SearchDemand $search = null,
         array $overwriteDemand = null
-    ) {
+    )
+    {
         /** @var \GeorgRinger\Eventnews\Domain\Model\Dto\Demand $demand */
         $demand = $this->createDemandObjectFromSettings($this->settings,
             'GeorgRinger\\Eventnews\\Domain\\Model\\Dto\\Demand');
@@ -87,14 +93,26 @@ class NewsController extends \GeorgRinger\News\Controller\NewsController {
         }
 
         $demand->setDay($overwriteDemand['day']);
+        $demand->setRespectDay(true);
 
-        if (!is_null($search)) {
+        if ($search !== null) {
+            $validCategories = [];
+            foreach ((array)$search->getCategories() as $cat) {
+                if ($cat) {
+                    $validCategories[] = $cat;
+                }
+            }
+            if (!empty($validCategories)) {
+                $demand->setCategories($validCategories);
+            }
             $demand->setLocations($search->getLocations());
             $demand->setOrganizers($search->getOrganizers());
+            $demand->setSearchDateFrom($search->getSearchDateFrom());
+            $demand->setSearchDateTo($search->getSearchDateTo());
+            $demand->setTags(implode(',', (array)$search->getTags()));
         }
         return $demand;
     }
-
 
     /**
      * Get a date configuration of the given time offset
@@ -103,17 +121,16 @@ class NewsController extends \GeorgRinger\News\Controller\NewsController {
      * @param string $timeString
      * @return array
      */
-    protected function getDateConfig($demand, $timeString = '')
+    protected function getDateConfig($demand, $timeString = ''): array
     {
         $date = \DateTime::createFromFormat('d.m.Y', sprintf('1.%s.%s', $demand->getMonth(), $demand->getYear()));
         if (!empty($timeString)) {
             $date->modify($timeString);
         }
-        return array(
+        return [
             'date' => $date,
             'month' => $date->format('n'),
             'year' => $date->format('Y')
-        );
+        ];
     }
-
 }

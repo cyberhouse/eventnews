@@ -51,6 +51,9 @@
 			<trans-unit id="tx_news_domain_model_news.location_simple">
 				<source>Location simple</source>
 			</trans-unit>
+            <trans-unit id="tab.eventnews">
+				<source>Event details</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

@@ -1,4 +1,8 @@
 
 plugin.tx_news.settings {
 	demandClass = GeorgRinger\Eventnews\Domain\Model\Dto\Demand
+
+	# Unless otherwise flexformed restrict all news plugins to display "news only"
+	eventRestriction = 2
+	overrideFlexformSettingsIfEmpty := addToList(eventRestriction)
 }

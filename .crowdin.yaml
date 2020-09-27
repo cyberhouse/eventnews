@@ -1,0 +1,8 @@
+files:
+  - source: /Resources/Private/Language/*.xlf
+    translation: /Resources/Private/Language/%two_letters_code%.%original_file_name%
+  - source: /Resources/Private/Language/Overrides/*.xlf
+    ignore:
+      - /Resources/Private/Language/Overrides/de.*
+    translation: >-
+      /Resources/Private/Language/Overrides/%two_letters_code%.%original_file_name%
