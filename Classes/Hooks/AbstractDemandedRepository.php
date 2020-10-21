@@ -10,6 +10,7 @@ namespace GeorgRinger\Eventnews\Hooks;
  */
 
 use GeorgRinger\Eventnews\Domain\Model\Dto\Demand;
+use GeorgRinger\News\Domain\Model\News;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 
 class AbstractDemandedRepository
@@ -23,7 +24,7 @@ class AbstractDemandedRepository
      */
     public function modify(array $params)
     {
-        if (get_class($params['demand']) !== Demand::class) {
+        if (get_class($params['demand']) !== Demand::class || $params['query']->getType() !== News::class) {
             return;
         }
 
