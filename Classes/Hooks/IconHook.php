@@ -22,7 +22,7 @@ class IconHook
     public function run(array $params)
     {
         $row = $params['row'];
-        if ($row['is_event']) {
+        if ($row['is_event'] ?? false) {
             return 'ext-news-type-event';
         }
 
