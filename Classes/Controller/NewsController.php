@@ -65,8 +65,8 @@ class NewsController extends \GeorgRinger\News\Controller\NewsController
             'currentMonthData' => $this->getDateConfig($demand),
         ];
 
-        $assignedValues = $this->emitActionSignal('NewsController', self::SIGNAL_NEWS_MONTH_ACTION, $assignedValues);
-        $this->view->assignMultiple($assignedValues);
+        $event = $this->eventDispatcher->dispatch(new \GeorgRinger\Eventnews\Event\NewsMonthActionEvent($this, $assignedValues));
+        $this->view->assignMultiple($event->getAssignedValues());
     }
 
     /**
@@ -92,7 +92,7 @@ class NewsController extends \GeorgRinger\News\Controller\NewsController
             $demand->setYear(date('Y'));
         }
 
-        $demand->setDay($overwriteDemand['day']);
+        $demand->setDay((int)($overwriteDemand['day'] ?? 0));
         $demand->setRespectDay(true);
 
         if ($search !== null) {

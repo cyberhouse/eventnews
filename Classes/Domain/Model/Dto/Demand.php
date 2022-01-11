@@ -91,22 +91,6 @@ class Demand extends NewsDemand
     }
 
     /**
-     * @return int
-     */
-    public function getDay()
-    {
-        return $this->day;
-    }
-
-    /**
-     * @param int $day
-     */
-    public function setDay($day)
-    {
-        $this->day = $day;
-    }
-
-    /**
      * @return string
      */
     public function getSearchDateTo()
