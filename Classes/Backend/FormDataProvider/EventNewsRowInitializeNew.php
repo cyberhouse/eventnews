@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+
 namespace GeorgRinger\Eventnews\Backend\FormDataProvider;
 
 /**
@@ -21,13 +22,13 @@ class EventNewsRowInitializeNew implements FormDataProviderInterface
      * @param array $result
      * @return array
      */
-    public function addData(array $result)
+    public function addData(array $result): array
     {
         if ($result['command'] !== 'new' || $result['tableName'] !== 'tx_news_domain_model_news') {
             return $result;
         }
 
-        if (is_array($result['pageTsConfig']['tx_news.']) && (bool)$result['pageTsConfig']['tx_news.']['newRecordAsEvent']) {
+        if ($result['pageTsConfig']['tx_news.']['newRecordAsEvent'] ?? false) {
             $result['databaseRow']['is_event'] = 1;
         }
 
