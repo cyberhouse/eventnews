@@ -12,7 +12,8 @@
     "authors": [
         {
             "name": "Georg Ringer",
-            "role": "Developer"
+            "role": "Developer",
+            "homepage": "https://ringer.it"
         }
     ],
     "license": ["GPL-2.0-or-later"],
@@ -36,10 +37,10 @@
     "replace": {
         "typo3-ter/eventnews": "self.version"
     },
-	"config": {
-		"vendor-dir": ".Build/vendor",
-		"bin-dir": ".Build/bin"
-	},
+    "config": {
+        "vendor-dir": ".Build/vendor",
+        "bin-dir": ".Build/bin"
+    },
     "extra": {
         "typo3/cms": {
             "extension-key": "eventnews",
