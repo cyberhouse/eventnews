@@ -1,5 +1,7 @@
 <?php
+
 declare(strict_types=1);
+
 namespace GeorgRinger\Eventnews\Domain\Model\Dto;
 
 /**
