@@ -33,7 +33,7 @@ class EventNewsDataHandlerHook
     ) {
         if ($status === 'new' && $table === 'tx_news_domain_model_news') {
             $tsconfig = BackendUtility::getPagesTSconfig($fields['pid']);
-            if (isset($tsconfig['tx_news.']) && is_array($tsconfig['tx_news.']) && (int)$tsconfig['tx_news.']['newRecordAsEvent'] === 1) {
+            if ((int)($tsconfig['tx_news.']['newRecordAsEvent'] ?? 0) === 1) {
                 $fields['is_event'] = 1;
             }
         }
