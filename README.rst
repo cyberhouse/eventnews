@@ -1,18 +1,18 @@
-.. image:: https://poser.pugx.org/eventnews/v/stable
+.. image:: https://poser.pugx.org/georgringer/eventnews/v/stable
    :alt: Latest Stable Version
-   :target: https://extensions.typo3.org/extension/eventnews/
+   :target: https://extensions.typo3.org/extension/georgringer/eventnews/
 
 .. image:: https://img.shields.io/badge/TYPO3-11-orange.svg
    :alt: TYPO3 11
    :target: https://get.typo3.org/version/11
 
-.. image:: https://poser.pugx.org/eventnews/d/total
+.. image:: https://poser.pugx.org/georgringer/eventnews/d/total
    :alt: Total Downloads
-   :target: https://packagist.org/packages/eventnews
+   :target: https://packagist.org/packages/georgringer/eventnews
 
-.. image:: https://poser.pugx.org/eventnews/d/monthly
+.. image:: https://poser.pugx.org/georgringer/eventnews/d/monthly
    :alt: Monthly Downloads
-   :target: https://packagist.org/packages/eventnews
+   :target: https://packagist.org/packages/georgringer/eventnews
 
 =========
 eventnews
