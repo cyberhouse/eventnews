@@ -1,7 +1,10 @@
 ﻿.. include:: /Includes.rst.txt
 
-
 .. _thanks:
+
+======
+Thanks
+======
 
 Sponsors
 ========

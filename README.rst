@@ -1,6 +1,6 @@
 .. image:: https://poser.pugx.org/georgringer/eventnews/v/stable
    :alt: Latest Stable Version
-   :target: https://extensions.typo3.org/extension/georgringer/eventnews/
+   :target: https://extensions.typo3.org/extension/eventnews/
 
 .. image:: https://img.shields.io/badge/TYPO3-11-orange.svg
    :alt: TYPO3 11
