@@ -1,0 +1,25 @@
+.. image:: https://poser.pugx.org/eventnews/v/stable
+   :alt: Latest Stable Version
+   :target: https://extensions.typo3.org/extension/eventnews/
+
+.. image:: https://img.shields.io/badge/TYPO3-11-orange.svg
+   :alt: TYPO3 11
+   :target: https://get.typo3.org/version/11
+
+.. image:: https://poser.pugx.org/eventnews/d/total
+   :alt: Total Downloads
+   :target: https://packagist.org/packages/eventnews
+
+.. image:: https://poser.pugx.org/eventnews/d/monthly
+   :alt: Monthly Downloads
+   :target: https://packagist.org/packages/eventnews
+
+=========
+eventnews
+=========
+
+Additional calendar view for the TYPO3 extension news.
+
+:Repository:  https://github.com/georgringer/eventnews
+:Read online: https://docs.typo3.org/p/eventnews/main/en-us/
+:TER:         https://extensions.typo3.org/extension/eventnews/
