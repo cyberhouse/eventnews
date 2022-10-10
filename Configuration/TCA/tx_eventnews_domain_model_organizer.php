@@ -2,7 +2,7 @@
 
 defined('TYPO3_MODE') or die();
 
-return [
+$tx_eventnews_domain_model_organizer = [
     'ctrl' => [
         'title' => 'LLL:EXT:eventnews/Resources/Private/Language/locallang_db.xlf:tx_eventnews_domain_model_organizer',
         'label' => 'title',
@@ -158,3 +158,13 @@ return [
         ],
     ],
 ];
+
+$versionInformation = TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(TYPO3\CMS\Core\Information\Typo3Version::class);
+if ($versionInformation->getMajorVersion() >= 11) {
+    unset($tx_eventnews_domain_model_organizer['interface']);
+    $tx_eventnews_domain_model_organizer['columns']['sys_language_uid']['config'] = [
+        'type' => 'language'
+    ];
+}
+
+return $tx_eventnews_domain_model_organizer;
