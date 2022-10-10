@@ -46,8 +46,8 @@ class NewsController extends \GeorgRinger\News\Controller\NewsController
         $locationRepository = $this->objectManager->get(\GeorgRinger\Eventnews\Domain\Repository\LocationRepository::class);
         $organizerRepository = $this->objectManager->get(\GeorgRinger\Eventnews\Domain\Repository\OrganizerRepository::class);
 
-        $organizerPidList = $this->settings['startingpointOrganizer'] ?: $this->settings['startingpoint'];
-        $locationPidList = $this->settings['startingpointLocation'] ?: $this->settings['startingpoint'];
+        $organizerPidList = $this->settings['startingpointOrganizer'] ?? $this->settings['startingpoint'];
+        $locationPidList = $this->settings['startingpointLocation'] ?? $this->settings['startingpoint'];
 
         $assignedValues = [
             'search' => $search,
