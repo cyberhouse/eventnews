@@ -21,5 +21,5 @@ eventnews
 Additional calendar view for the TYPO3 extension news.
 
 :Repository:  https://github.com/georgringer/eventnews
-:Read online: https://docs.typo3.org/p/eventnews/main/en-us/
+:Read online: https://docs.typo3.org/typo3cms/extensions/eventnews/stable/
 :TER:         https://extensions.typo3.org/extension/eventnews/
