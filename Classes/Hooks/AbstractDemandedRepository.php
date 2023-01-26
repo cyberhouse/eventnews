@@ -95,12 +95,12 @@ class AbstractDemandedRepository
             }
 
             // Time start
-            $convertedDateStart = strtotime($demand->getSearchDateFrom());
+            $convertedDateStart = strtotime($demand->getSearchDateFrom() ?? '');
             if (!$convertedDateStart) {
                 $convertedDateStart = PHP_INT_MIN;
             }
             // Time end
-            $convertedDateEnd = strtotime($demand->getSearchDateTo());
+            $convertedDateEnd = strtotime($demand->getSearchDateTo() ?? '');
             if ($convertedDateEnd) {
                 $convertedDateEnd += 86350;
             } else {
