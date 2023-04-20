@@ -38,7 +38,9 @@ class Demand extends NewsDemand
 
     public function __construct(array $settings = null)
     {
-        $this->eventRestriction = $settings['eventRestriction'];
+        if (is_array($settings) && isset($settings['eventRestriction'])) {
+            $this->eventRestriction = $settings['eventRestriction'];
+        }
     }
 
     /**
