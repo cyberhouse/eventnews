@@ -19,7 +19,7 @@
     "license": ["GPL-2.0-or-later"],
     "require": {
         "georgringer/news": "^11.1",
-        "typo3/cms-core": "^11 || ^12.3"
+        "typo3/cms-core": "^11 || ^12.4"
     },
     "require-dev": {
         "php-coveralls/php-coveralls": "^2.1"
