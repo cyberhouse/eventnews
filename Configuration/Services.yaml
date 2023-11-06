@@ -1,0 +1,21 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  GeorgRinger\Eventnews\:
+    resource: '../Classes/*'
+    exclude: '../Classes/Domain/Model/*'
+
+  GeorgRinger\Eventnews\EventListener\NewsImportListener:
+    tags:
+      - name: event.listener
+        identifier: 'eventnews-newsimportlistener'
+        event: GeorgRinger\News\Event\NewsImportPostHydrateEvent
+
+  GeorgRinger\Eventnews\Hooks\FlexFormHook:
+    tags:
+      - name: event.listener
+        identifier: 'eventnews-flexformhook'
+        event: TYPO3\CMS\Core\Configuration\Event\AfterFlexFormDataStructureParsedEvent

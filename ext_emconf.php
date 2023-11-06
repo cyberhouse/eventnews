@@ -1,23 +1,20 @@
 <?php
 
-$EM_CONF[$_EXTKEY] = array(
-	'title' => 'News events',
-	'description' => 'Events for news',
-	'category' => 'plugin',
-	'author' => 'Georg Ringer',
-	'author_email' => '',
-	'state' => 'beta',
-	'internal' => '',
-	'uploadfolder' => '0',
-	'createDirs' => '',
-	'clearCacheOnLoad' => 1,
-	'version' => '1.0.2',
-	'constraints' => array(
-		'depends' => array(
-			'typo3' => '6.2.0-7.9.99',
-			'news' => '3.2.0',
-		),
-		'conflicts' => array(),
-		'suggests' => array(),
-	),
-);
+$EM_CONF[$_EXTKEY] = [
+    'title' => 'News events',
+    'description' => 'Events for news',
+    'category' => 'plugin',
+    'author' => 'Georg Ringer',
+    'author_email' => '',
+    'state' => 'stable',
+    'clearCacheOnLoad' => true,
+    'version' => '6.0.1',
+    'constraints' => [
+        'depends' => [
+            'typo3' => '11.5.0-12.5.99',
+            'news' => '11.1.0-11.99.9',
+        ],
+        'conflicts' => [],
+        'suggests' => [],
+    ],
+];

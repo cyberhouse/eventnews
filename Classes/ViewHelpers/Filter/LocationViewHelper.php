@@ -2,22 +2,42 @@
 
 namespace GeorgRinger\Eventnews\ViewHelpers\Filter;
 
+/**
+ * This file is part of the "eventnews" Extension for TYPO3 CMS.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
+ */
+
 use GeorgRinger\Eventnews\Domain\Model\News;
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 class LocationViewHelper extends AbstractViewHelper
 {
 
     /**
-     * @param object $locations
-     * @param object $news
-     * @param string $as
-     * @return mixed
-     * @throws \TYPO3\CMS\Fluid\Core\ViewHelper\Exception\InvalidVariableException
+     * @var bool
      */
-    public function render($locations, $news, $as = 'filteredLocations')
+    protected $escapeOutput = false;
+
+    public function initializeArguments()
     {
-        $filteredLocations = $availableLocations = array();
+        parent::initializeArguments();
+        $this->registerArgument('locations', 'object', 'Locations');
+        $this->registerArgument('news', 'object', 'News');
+        $this->registerArgument('as', 'string', 'as variable', false, 'filteredLocations');
+    }
+
+    /**
+     * @return string
+     */
+    public function render()
+    {
+        $locations = $this->arguments['locations'];
+        $news = $this->arguments['news'];
+        $as = $this->arguments['as'];
+
+        $filteredLocations = $availableLocations = [];
         foreach ($locations as $locationItem) {
             $availableLocations[$locationItem->getUid()] = 1;
         }

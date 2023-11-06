@@ -1,63 +1,51 @@
-﻿.. ==================================================
-.. FOR YOUR INFORMATION
-.. --------------------------------------------------
-.. -*- coding: utf-8 -*- with BOM.
+﻿.. include:: /Includes.rst.txt
 
-.. include:: Includes.txt
+=========
+eventnews
+=========
 
+:Extension key:
+   eventnews
 
-.. _start:
+:Package name:
+   eventnews
 
-=============================================================
-news events
-=============================================================
+:Version:
+   |release|
 
-.. only:: html
+:Language:
+   en
 
-	:Classification:
-		eventnews
+:Author:
+   Georg Ringer and contributors
 
-	:Version:
-		|release|
+:License:
+   This document is published under the
+   `Creative Commons BY 4.0 <https://creativecommons.org/licenses/by/4.0/>`__
+   license.
 
-	:Language:
-		en
+:Rendered:
+   |today|
 
-	:Description:
-		Additional calendar view for the TYPO3 CMS extension "news".
+----
 
-	:Keywords:
-		news,calendar,extbase,events
+Additional calendar view for the TYPO3 extension :t3ext:`news`.
 
-	:Copyright:
-		2015
+----
 
-	:Author:
-		Georg Ringer
+**Table of Contents:**
 
-	:Email:
-		georg.ringer@gmail.com
+..  toctree::
+    :titlesonly:
+    :glob:
 
-	:License:
-		This document is published under the Open Content License
-		available from http://www.opencontent.org/opl.shtml
-
-	:Rendered:
-		|today|
-
-	The content of this document is related to TYPO3,
-	a GNU/GPL CMS/Framework available from `www.typo3.org <http://www.typo3.org/>`_.
-
-
-	**Table of Contents**
+    Introduction/Index
+    UsersManual/Index
+    AdministratorManual/Index
+    NeedSupport/Index
+    Thanks/Index
 
 .. toctree::
-	:maxdepth: 5
-	:titlesonly:
-	:glob:
+   :hidden:
 
-	Introduction/Index
-	UsersManual/Index
-	AdministratorManual/Index
-	NeedSupport/Index
-	Thanks/Index
+   Sitemap
