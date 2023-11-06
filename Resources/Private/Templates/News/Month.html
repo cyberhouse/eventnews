@@ -181,7 +181,7 @@
 			<f:if condition="{day.news}">
 				<f:then>
 					<strong>
-						<f:link.action action="month" addQueryString="1" additionalParams="{tx_news_pi1:{overwriteDemand:{year:day.year,month:day.month,day:day.day}}}">{day.day}</f:link.action>
+						<f:link.action action="month" addQueryString="1" arguments="{overwriteDemand:{year:day.year,month:day.month,day:day.day}}">{day.day}</f:link.action>
 					</strong>
 
 					<f:for each="{day.news}" as="newsItem">
